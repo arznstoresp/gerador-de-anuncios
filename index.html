@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ShopeeLens — Gerador de Ângulos para Shopee</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0e;--s1:#111118;--s2:#18181f;
+  --bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.12);
+  --or:#FF5722;--o2:#FF8A50;--o3:rgba(255,87,34,.12);
+  --tx:#ede8e3;--t2:#999;--mu:#444;
+  --gr:#4CAF50;--g2:rgba(76,175,80,.12);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* grid bg */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    linear-gradient(rgba(255,87,34,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,87,34,.03) 1px,transparent 1px);
+  background-size:56px 56px}
+
+/* glow */
+body::after{content:'';position:fixed;top:-30%;left:50%;transform:translateX(-50%);
+  width:900px;height:600px;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse,rgba(255,87,34,.055) 0%,transparent 68%)}
+
+/* ─── HEADER ─── */
+header{position:sticky;top:0;z-index:200;
+  background:rgba(10,10,14,.94);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--bd);padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:11px}
+.logo-icon{width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(135deg,#FF5722,#BF360C);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;box-shadow:0 4px 16px rgba(255,87,34,.4);flex-shrink:0}
+.logo-name{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.5px}
+.logo-name span{color:var(--or)}
+.logo-sub{font-size:11px;color:var(--mu);margin-top:1px}
+.hbadge{background:var(--o3);border:1px solid rgba(255,87,34,.28);
+  color:var(--o2);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600;white-space:nowrap}
+
+/* ─── MAIN ─── */
+main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 24px 80px}
+.slbl{font-size:10px;letter-spacing:1.3px;text-transform:uppercase;
+  color:var(--mu);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.slbl::before{content:'';width:18px;height:1px;background:var(--mu)}
+
+/* ─── API BOX ─── */
+.apibox{border:1px solid rgba(255,87,34,.2);border-radius:18px;
+  padding:24px 28px;margin-bottom:32px;
+  background:linear-gradient(135deg,rgba(255,87,34,.07),rgba(255,87,34,.02));
+  position:relative;overflow:hidden}
+.apibox::after{content:'🔑';position:absolute;right:22px;top:16px;
+  font-size:48px;opacity:.06;pointer-events:none}
+.api-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:6px}
+.api-desc{font-size:13px;color:var(--t2);margin-bottom:16px;line-height:1.75}
+.api-desc a{color:var(--o2);text-decoration:none;border-bottom:1px solid rgba(255,138,80,.3)}
+.api-steps{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.api-step{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--t2);line-height:1.55}
+.api-num{min-width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:1px;
+  background:var(--o3);border:1px solid rgba(255,87,34,.28);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;color:var(--o2)}
+.api-row{display:flex;gap:10px}
+#ki{flex:1;background:rgba(0,0,0,.5);border:1px solid var(--bd2);
+  border-radius:11px;padding:12px 16px;color:var(--tx);
+  font-size:13px;font-family:'DM Sans',sans-serif;
+  outline:none;transition:border-color .2s;letter-spacing:.3px}
+#ki:focus{border-color:var(--or)}
+#ki::placeholder{color:#333}
+#ks{background:linear-gradient(135deg,#FF5722,#BF360C);color:#fff;border:none;
+  border-radius:11px;padding:12px 24px;font-size:13px;
+  font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 16px rgba(255,87,34,.32);transition:all .2s;white-space:nowrap}
+#ks:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(255,87,34,.48)}
+.api-ok{display:none;align-items:center;gap:8px;font-size:12.5px;
+  color:var(--gr);margin-top:12px;background:var(--g2);
+  border:1px solid rgba(76,175,80,.25);border-radius:10px;padding:9px 14px}
+
+/* ─── UPLOAD ─── */
+#dz{border:2px dashed rgba(255,255,255,.1);border-radius:20px;
+  padding:60px 32px;text-align:center;cursor:pointer;transition:all .25s;
+  background:rgba(255,255,255,.013);
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  position:relative;overflow:hidden}
+#dz::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 50%,rgba(255,87,34,.05),transparent 65%);
+  opacity:0;transition:opacity .3s}
+#dz:hover::after,#dz.ov::after{opacity:1}
+#dz:hover,#dz.ov{border-color:var(--or);background:rgba(255,87,34,.025)}
+#dz input{display:none}
+.dz-icon{width:74px;height:74px;border-radius:20px;
+  background:var(--o3);border:1px solid rgba(255,87,34,.22);
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;transition:transform .22s;flex-shrink:0}
+#dz:hover .dz-icon{transform:scale(1.06) rotate(-3deg)}
+.dz-title{font-family:'Syne',sans-serif;font-weight:700;font-size:21px}
+.dz-sub{font-size:13px;color:var(--mu);margin-top:3px}
+.atags{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-top:2px}
+.atag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;padding:4px 12px;font-size:11px;color:var(--mu);transition:all .2s}
+#dz:hover .atag{border-color:rgba(255,87,34,.18);color:rgba(255,138,80,.6)}
+
+/* ─── 2 COL ─── */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+@media(max-width:620px){.two{grid-template-columns:1fr}}
+
+#pb{border-radius:16px;overflow:hidden;border:1px solid var(--bd);
+  background:#0d0d13;position:relative;min-height:200px;
+  display:flex;align-items:center;justify-content:center}
+#pi{width:100%;display:block;max-height:320px;object-fit:contain}
+.pbg{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.76);
+  backdrop-filter:blur(10px);border-radius:9px;padding:5px 13px;
+  font-size:12px;color:#aaa;border:1px solid rgba(255,255,255,.07)}
+
+#sz{border:2px dashed rgba(255,255,255,.09);border-radius:16px;
+  padding:32px 20px;text-align:center;cursor:pointer;
+  background:rgba(255,255,255,.01);transition:all .2s;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  min-height:200px;justify-content:center}
+#sz:hover,#sz.ov{border-color:var(--or);background:rgba(255,87,34,.025)}
+#sz input{display:none}
+.sz-icon{font-size:36px;transition:transform .35s}
+#sz:hover .sz-icon{transform:rotate(180deg)}
+
+/* ─── BOTÃO ─── */
+#gw{text-align:center;margin-bottom:40px}
+#gb{background:linear-gradient(135deg,#FF5722,#BF360C);color:#fff;border:none;
+  border-radius:15px;padding:17px 58px;font-size:17px;
+  font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;
+  box-shadow:0 8px 34px rgba(255,87,34,.42);transition:all .25s;
+  display:inline-flex;align-items:center;gap:12px;
+  position:relative;overflow:hidden}
+#gb::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent);
+  opacity:0;transition:opacity .2s}
+#gb:hover:not(:disabled)::before{opacity:1}
+#gb:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 46px rgba(255,87,34,.55)}
+#gb:disabled{background:rgba(255,87,34,.18);box-shadow:none;cursor:not-allowed;transform:none}
+
+.pw{max-width:420px;margin:16px auto 0}
+.pt{height:4px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden}
+.pf{height:100%;width:0%;background:linear-gradient(90deg,#FF5722,#FF8A50,#FF5722);
+  background-size:200% 100%;border-radius:4px;transition:width .5s ease;
+  animation:shimmer 1.8s infinite}
+.ptxt{font-size:12px;color:var(--mu);margin-top:8px}
+.pdots{display:flex;justify-content:center;gap:10px;margin-top:11px}
+.pd{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.1);transition:all .3s}
+.pd.done{background:var(--gr)}
+.pd.active{background:var(--or);box-shadow:0 0 8px rgba(255,87,34,.7)}
+
+/* ─── TABS ─── */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tab{background:rgba(255,255,255,.04);border:1px solid var(--bd);color:var(--mu);
+  border-radius:11px;padding:8px 16px;font-size:12px;
+  font-family:'DM Sans',sans-serif;cursor:pointer;
+  transition:all .18s;display:flex;align-items:center;gap:7px;font-weight:500}
+.tab:hover{border-color:rgba(255,87,34,.38);color:var(--o2);background:rgba(255,87,34,.06)}
+.tab.on{background:rgba(255,87,34,.14);border-color:rgba(255,87,34,.5);color:var(--o2)}
+
+/* ─── CARD ─── */
+@keyframes si{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.spinner{width:22px;height:22px;border:2.5px solid rgba(255,87,34,.2);
+  border-top-color:var(--or);border-radius:50%;animation:spin .75s linear infinite;
+  display:inline-block;vertical-align:middle}
+
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:22px;
+  overflow:hidden;animation:si .38s ease}
+.ch{padding:20px 26px;border-bottom:1px solid var(--bd);
+  display:flex;align-items:center;gap:14px}
+.chi{width:46px;height:46px;border-radius:13px;font-size:22px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center}
+.cht{font-family:'Syne',sans-serif;font-weight:700;font-size:18px}
+.chs{font-size:12px;color:var(--mu);margin-top:3px}
+.cb{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:540px){.cb{grid-template-columns:1fr}}
+.ib{background:var(--s2);border-radius:13px;padding:15px 17px;
+  border:1px solid rgba(255,255,255,.045);transition:border-color .18s}
+.ib:hover{border-color:rgba(255,255,255,.1)}
+.ib.or{background:rgba(255,87,34,.05);border-color:rgba(255,87,34,.15)}
+.ib.full{grid-column:1/-1}
+.ib.ac{border-left-width:3px;border-left-style:solid}
+.il{font-size:10px;letter-spacing:.9px;text-transform:uppercase;
+  color:var(--mu);margin-bottom:9px;font-weight:600}
+.il.or{color:var(--or)}
+.it{font-size:13px;color:#ccc;line-height:1.7}
+.tw{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.tg{background:rgba(255,87,34,.09);border:1px solid rgba(255,87,34,.23);
+  color:var(--o2);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:500}
+
+.cstate{padding:44px;text-align:center}
+.cstate.lo{color:var(--mu)}
+.cstate.er{color:#ff8585}
+
+/* ─── GUIDE ─── */
+.guide{margin-top:22px;padding:18px 24px;
+  background:rgba(255,87,34,.05);border:1px solid rgba(255,87,34,.13);
+  border-radius:16px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.g-content{flex:1;min-width:200px}
+.g-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:5px}
+.g-txt{font-size:12px;color:#666;line-height:1.72}
+.g-txt strong{color:var(--o2)}
+.gbadge{background:var(--g2);border:1px solid rgba(76,175,80,.25);
+  border-radius:11px;padding:7px 16px;font-size:12px;color:var(--gr);
+  white-space:nowrap;font-weight:600}
+
+/* ─── EMPTY ─── */
+.empty{text-align:center;padding:72px 0 28px}
+.empty-icon{font-size:68px;opacity:.16;margin-bottom:16px;animation:pulse 3s ease-in-out infinite}
+.empty-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:#2a2a2a;margin-bottom:10px}
+.empty-sub{font-size:14px;color:#222;max-width:340px;margin:0 auto;line-height:1.8}
+
+/* ─── TOAST ─── */
+#toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(18px);
+  background:#1c1c26;border:1px solid var(--bd2);border-radius:12px;
+  padding:11px 22px;font-size:13px;color:var(--tx);
+  box-shadow:0 6px 28px rgba(0,0,0,.5);z-index:999;
+  opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;max-width:92vw}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.err{border-color:rgba(255,80,80,.3);color:#ff8585;background:#1e1218}
+#toast.ok{border-color:rgba(76,175,80,.3);color:var(--gr);background:#121c14}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🛍</div>
+    <div>
+      <div class="logo-name">Shopee<span>Lens</span></div>
+      <div class="logo-sub">Gerador de Ângulos com IA · Powered by Claude</div>
+    </div>
+  </div>
+  <div class="hbadge">✦ 5 ângulos · sem cadastro</div>
+</header>
+
+<main>
+
+  <!-- CHAVE API -->
+  <div class="apibox" id="apibox">
+    <div class="api-title">🔑 Chave da API Anthropic (Claude)</div>
+    <div class="api-desc">
+      Crie sua chave grátis em
+      <a href="https://console.anthropic.com/keys" target="_blank">console.anthropic.com/keys</a>.
+      Ela fica salva no seu navegador.
+    </div>
+    <div class="api-steps">
+      <div class="api-step"><div class="api-num">1</div><span>Acesse o link acima e faça login (ou crie conta)</span></div>
+      <div class="api-step"><div class="api-num">2</div><span>Clique em <strong>"Create Key"</strong> → copie a chave</span></div>
+      <div class="api-step"><div class="api-num">3</div><span>Cole abaixo — começa com <strong>sk-ant-…</strong></span></div>
+    </div>
+    <div class="api-row">
+      <input id="ki" type="password" placeholder="sk-ant-api03-..." autocomplete="off"
+             onkeydown="if(event.key==='Enter')saveKey()"/>
+      <button id="ks" onclick="saveKey()">Salvar</button>
+    </div>
+    <div class="api-ok" id="aok">✅ Chave salva! Envie a foto do produto abaixo.</div>
+  </div>
+
+  <!-- UPLOAD -->
+  <div id="usec">
+    <div class="slbl">01 — Envie a foto do produto</div>
+    <div id="dz" ondragover="dov(event,this)" ondragleave="dlv(this)" ondrop="ddr(event,this)"
+         onclick="document.getElementById('f1').click()">
+      <input type="file" id="f1" accept="image/*" onchange="lf(this.files[0])"/>
+      <div class="dz-icon">📸</div>
+      <div>
+        <div class="dz-title">Arraste a foto aqui ou clique para selecionar</div>
+        <div class="dz-sub">JPG · PNG · WEBP · até 10MB</div>
+      </div>
+      <div class="atags">
+        <span class="atag">Frente Principal</span>
+        <span class="atag">Ângulo 45°</span>
+        <span class="atag">Vista Lateral</span>
+        <span class="atag">Detalhe Close-up</span>
+        <span class="atag">Vista Superior</span>
+      </div>
+    </div>
+    <div class="empty">
+      <div class="empty-icon">🛍️</div>
+      <div class="empty-title">Turbine seus anúncios na Shopee</div>
+      <div class="empty-sub">Envie 1 foto e a IA analisa e gera orientações de 5 ângulos profissionais para vender mais</div>
+    </div>
+  </div>
+
+  <!-- COM IMAGEM -->
+  <div id="lsec" style="display:none">
+    <div class="two">
+      <div>
+        <div class="slbl">01 — Foto enviada</div>
+        <div id="sz" ondragover="dov(event,this)" ondragleave="dlv(this)" ondrop="ddr(event,this)"
+             onclick="document.getElementById('f2').click()">
+          <input type="file" id="f2" accept="image/*" onchange="lf(this.files[0])"/>
+          <div class="sz-icon">🔄</div>
+          <div style="font-size:14px;color:var(--t2)">Clique ou arraste para <strong style="color:var(--o2)">trocar</strong></div>
+        </div>
+      </div>
+      <div>
+        <div class="slbl">02 — Prévia</div>
+        <div id="pb"><img id="pi" src="" alt="produto"/><div class="pbg">✓ Pronto para analisar</div></div>
+      </div>
+    </div>
+    <div id="gw">
+      <button id="gb" onclick="gen()">
+        <span>✦</span><span id="gt">Gerar 5 Ângulos para Shopee</span>
+      </button>
+      <div class="pw" id="pw" style="display:none">
+        <div class="pt"><div class="pf" id="pf"></div></div>
+        <div class="pdots" id="pdots"></div>
+        <div class="ptxt" id="ptxt">Iniciando…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTADOS -->
+  <div id="rsec" style="display:none">
+    <div class="slbl">03 — Ângulos gerados
+      <span id="dc" style="color:var(--o2);font-family:'Syne',sans-serif;font-size:13px">(0/5)</span>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div id="ca"></div>
+    <div class="guide">
+      <div style="font-size:26px">📐</div>
+      <div class="g-content">
+        <div class="g-title">Requisitos Shopee</div>
+        <div class="g-txt">Proporção <strong>1:1</strong> · Mín. <strong>500×500px</strong> · Ideal <strong>2000×2000px</strong> · Fundo <strong>branco</strong> · Até <strong>9 fotos</strong> · Máx. <strong>2MB</strong></div>
+      </div>
+      <div class="gbadge" id="rb">✓ 0/5 prontos</div>
+    </div>
+  </div>
+
+</main>
+<div id="toast"></div>
+
+<script>
+const ANGLES=[
+  {id:1,lb:'Frente Principal',ic:'◉',cl:'#FF6B35',
+   pr:'Analise este produto na imagem. Descreva como tirar a foto de FRENTE PRINCIPAL para a Shopee: enquadramento frontal, produto centralizado, fundo branco, iluminação uniforme. Seja específico para este produto.'},
+  {id:2,lb:'Ângulo 45°',ic:'◈',cl:'#FF8C42',
+   pr:'Analise este produto na imagem. Descreva como tirar a foto em ÂNGULO 45° para a Shopee: produto em diagonal mostrando frente e lateral, evidenciando profundidade deste produto específico.'},
+  {id:3,lb:'Vista Lateral',ic:'◧',cl:'#FFA559',
+   pr:'Analise este produto na imagem. Descreva como tirar o PERFIL LATERAL para a Shopee: vista de lado mostrando espessura e acabamento lateral deste produto, fundo branco.'},
+  {id:4,lb:'Detalhe Close-up',ic:'⊕',cl:'#FFB347',
+   pr:'Analise este produto na imagem. Descreva como tirar o CLOSE-UP do detalhe mais atrativo para a Shopee: qual parte focar, distância, textura ou elemento diferencial deste produto.'},
+  {id:5,lb:'Vista Superior',ic:'◎',cl:'#FFC355',
+   pr:'Analise este produto na imagem. Descreva como tirar o FLAT LAY (vista de cima) para a Shopee: câmera 90° acima, produto centralizado, composição ideal para este produto específico.'},
+];
+
+let b64=null,mime=null,res=[],idx=0;
+
+window.addEventListener('load',()=>{
+  const k=localStorage.getItem('ant_key');
+  if(k){document.getElementById('ki').value=k;document.getElementById('aok').style.display='flex';}
+});
+function saveKey(){
+  const k=document.getElementById('ki').value.trim();
+  if(!k){toast('❌ Cole sua chave Anthropic','err');return;}
+  localStorage.setItem('ant_key',k);
+  document.getElementById('aok').style.display='flex';
+  toast('✅ Chave salva!','ok');
+}
+function gk(){return localStorage.getItem('ant_key')||'';}
+
+function dov(e,el){e.preventDefault();el.classList.add('ov');}
+function dlv(el){el.classList.remove('ov');}
+function ddr(e,el){e.preventDefault();el.classList.remove('ov');lf(e.dataTransfer.files[0]);}
+
+function lf(file){
+  if(!file||!file.type.startsWith('image/')){toast('❌ Use JPG, PNG ou WEBP','err');return;}
+  const url=URL.createObjectURL(file);
+  const img=new Image();
+  img.onload=()=>{
+    const max=900;let w=img.width,h=img.height;
+    if(w>max||h>max){if(w>h){h=Math.round(h*max/w);w=max;}else{w=Math.round(w*max/h);h=max;}}
+    const cv=document.createElement('canvas');cv.width=w;cv.height=h;
+    cv.getContext('2d').drawImage(img,0,0,w,h);
+    const data=cv.toDataURL('image/jpeg',0.82);
+    b64=data.split(',')[1];mime='image/jpeg';
+    document.getElementById('pi').src=data;
+    document.getElementById('usec').style.display='none';
+    document.getElementById('lsec').style.display='block';
+    document.getElementById('rsec').style.display='none';
+    res=[];idx=0;resetBtn();
+    URL.revokeObjectURL(url);
+    toast('✅ Foto carregada!','ok');
+  };
+  img.onerror=()=>toast('❌ Erro ao carregar imagem','err');
+  img.src=url;
+}
+
+function toast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='show '+(type||'');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.className='',3200);
+}
+function resetBtn(){
+  document.getElementById('gb').disabled=false;
+  document.getElementById('gt').textContent='Gerar 5 Ângulos para Shopee';
+  document.getElementById('pw').style.display='none';
+}
+function setLoad(i,pct){
+  document.getElementById('gb').disabled=true;
+  document.getElementById('gt').textContent='Analisando… '+pct+'%';
+  document.getElementById('pw').style.display='block';
+  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('ptxt').textContent='('+(i+1)+'/5) '+ANGLES[i].lb+'…';
+  document.getElementById('pdots').innerHTML=
+    ANGLES.map((_,j)=>'<div class="pd '+(j<i?'done':j===i?'active':'')+'"></div>').join('');
+}
+function renderTabs(){
+  const el=document.getElementById('tabs');el.innerHTML='';
+  res.forEach((r,i)=>{
+    const b=document.createElement('button');
+    b.className='tab'+(i===idx?' on':'');
+    const ic=r.st==='done'?'<span style="color:#4CAF50;font-size:10px">✓</span>'
+             :r.st==='err'?'<span style="color:#f55;font-size:10px">✗</span>'
+             :r.st==='load'?'<span class="spinner" style="width:11px;height:11px;border-width:1.5px"></span>':'';
+    b.innerHTML=`<span style="color:${r.cl};font-size:14px">${r.ic}</span>${r.lb}${ic}`;
+    b.onclick=()=>{idx=i;renderTabs();renderCard();};
+    el.appendChild(b);
+  });
+  const done=res.filter(r=>r.st==='done').length;
+  document.getElementById('dc').textContent='('+res.length+'/5)';
+  document.getElementById('rb').textContent='✓ '+done+'/5 prontos';
+}
+function renderCard(){
+  const area=document.getElementById('ca');
+  const r=res[idx];if(!r){area.innerHTML='';return;}
+  if(r.st==='load'){
+    area.innerHTML=`<div class="card"><div class="cstate lo">
+      <span class="spinner" style="width:30px;height:30px;border-width:2.5px"></span>
+      <div style="margin-top:12px;font-size:13px">Analisando com Claude IA…</div>
+      <div style="font-size:11.5px;color:var(--mu);margin-top:4px">Processando: <strong>${r.lb}</strong></div>
+    </div></div>`;return;
+  }
+  if(r.st==='err'){
+    area.innerHTML=`<div class="card"><div class="cstate er">
+      <div style="font-size:38px;margin-bottom:8px">⚠️</div>
+      <div style="font-size:14px;font-weight:600;margin-bottom:6px">Erro: ${r.lb}</div>
+      <div style="font-size:12px;color:var(--mu)">${r.msg}</div>
+    </div></div>`;return;
+  }
+  if(!r.d){area.innerHTML='';return;}
+  const d=r.d;
+  const tags=(d.tags||[]).map(t=>`<span class="tg">${t}</span>`).join('');
+  area.innerHTML=`
+  <div class="card">
+    <div class="ch" style="background:linear-gradient(135deg,${r.cl}12,transparent)">
+      <div class="chi" style="background:${r.cl}1c;border:1px solid ${r.cl}30">${r.ic}</div>
+      <div>
+        <div class="cht">${r.lb}</div>
+        <div class="chs">Ângulo ${idx+1} de 5 · Shopee 1:1</div>
+      </div>
+    </div>
+    <div class="cb">
+      <div class="ib full ac" style="border-left-color:${r.cl}">
+        <div class="il">📷 Como tirar esta foto</div>
+        <div class="it">${d.desc}</div>
+      </div>
+      <div class="ib">
+        <div class="il">⭐ Por que converte mais</div>
+        <div class="it">${d.dest}</div>
+      </div>
+      <div class="ib or">
+        <div class="il or">🛍 Dica Shopee</div>
+        <div class="it">${d.dica}</div>
+      </div>
+      <div class="ib">
+        <div class="il">💡 Equipamento</div>
+        <div class="it">${d.equip||'Celular com câmera boa + fundo branco + luz natural.'}</div>
+      </div>
+      <div class="ib full">
+        <div class="il"># Tags</div>
+        <div class="tw">${tags}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function callClaude(prompt){
+  const key=gk();
+  if(!key)throw new Error('Configure sua chave Anthropic acima.');
+  const resp=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':key,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body:JSON.stringify({
+      model:'claude-haiku-4-5-20251001',
+      max_tokens:800,
+      messages:[{role:'user',content:[
+        {type:'image',source:{type:'base64',media_type:mime,data:b64}},
+        {type:'text',text:prompt+'\n\nResponda SOMENTE com JSON puro sem markdown:\n{"desc":"como tirar esta foto passo a passo","dest":"por que este ângulo vende mais na Shopee","dica":"1 dica prática de setup ou edição","equip":"equipamento mínimo necessário","tags":["tag1","tag2","tag3","tag4","tag5"]}'}
+      ]}]
+    })
+  });
+  if(!resp.ok){
+    const e=await resp.json().catch(()=>({}));
+    const msg=e?.error?.message||'Erro HTTP '+resp.status;
+    if(resp.status===401)throw new Error('Chave inválida. Verifique em console.anthropic.com/keys');
+    if(resp.status===403)throw new Error('Sem permissão. Verifique sua chave Anthropic.');
+    if(resp.status===429)throw new Error('Limite atingido. Aguarde 1 minuto e tente novamente.');
+    throw new Error(msg);
+  }
+  const json=await resp.json();
+  const text=(json.content||[]).map(b=>b.text||'').join('').trim();
+  let obj=null;
+  try{obj=JSON.parse(text);}catch(_){}
+  if(!obj){const m=text.match(/\{[\s\S]*\}/);if(m)try{obj=JSON.parse(m[0]);}catch(_){}}
+  if(!obj) obj={desc:text,dest:'Análise gerada.',dica:'Siga as orientações.',equip:'Celular + fundo branco.',tags:[]};
+  return obj;
+}
+
+async function gen(){
+  if(!b64){toast('❌ Envie uma foto primeiro','err');return;}
+  if(!gk()){toast('❌ Configure sua chave Anthropic acima','err');return;}
+  res=[];idx=0;
+  document.getElementById('rsec').style.display='block';
+  setTimeout(()=>document.getElementById('rsec').scrollIntoView({behavior:'smooth',block:'start'}),80);
+
+  for(let i=0;i<ANGLES.length;i++){
+    setLoad(i,Math.round(i/ANGLES.length*100));
+    res[i]={...ANGLES[i],st:'load',d:null,msg:null};
+    renderTabs();if(i===idx)renderCard();
+    try{
+      const d=await callClaude(ANGLES[i].pr);
+      res[i]={...ANGLES[i],st:'done',d,msg:null};
+      toast('✅ '+ANGLES[i].lb+' pronto','ok');
+    }catch(e){
+      res[i]={...ANGLES[i],st:'err',d:null,msg:e.message};
+      toast('⚠️ '+ANGLES[i].lb+': '+e.message,'err');
+    }
+    renderTabs();if(i===idx)renderCard();
+  }
+  resetBtn();idx=0;renderTabs();renderCard();
+  const done=res.filter(r=>r.st==='done').length;
+  if(done>0)toast('🎉 '+done+'/5 ângulos prontos!','ok');
+}
+</script>
+</body>
+</html>

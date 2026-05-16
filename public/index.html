@@ -358,7 +358,7 @@ main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24p
   <!-- LINHA 1: UPLOAD + DADOS DO PRODUTO -->
   <div class="g2" style="gap:16px;margin-bottom:16px;align-items:start">
 
-    <!-- COLUNA ESQUERDA: FOTO -->
+    <!-- COLUNA ESQUERDA: FOTO DO PRODUTO -->
     <div class="panel" style="margin-bottom:0">
       <div class="panel-hd">📸 Foto do Produto <span class="panel-hd-sub">PNG transparente ou fundo sólido</span></div>
       <div class="panel-bd">
@@ -373,17 +373,6 @@ main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24p
             <img id="img-preview" style="width:100%;display:block;max-height:220px;object-fit:contain" src="" alt="produto"/>
           </div>
           <button class="btn-sec" onclick="document.getElementById('fi-main').click()" style="width:100%;font-size:12px">🔄 Trocar foto</button>
-        </div>
-        <!-- CENÁRIOS CANVAS INTEGRADO -->
-        <div id="gen-canvas-area" style="display:none;margin-top:14px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-            <span style="font-size:12px;font-weight:600;color:var(--t2)">🎨 Cenários do Produto</span>
-            <button class="btn-grn" id="canvas-gen-btn" onclick="genCanvasMockups()" style="padding:5px 12px;font-size:11px">▶ Gerar</button>
-          </div>
-          <div id="canvas-results" style="display:none">
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px" id="canvas-grid"></div>
-            <div class="info-blk" style="margin-top:10px;font-size:11px">💡 Baixe e use como fotos adicionais na Shopee</div>
-          </div>
         </div>
       </div>
     </div>
@@ -452,38 +441,72 @@ main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24p
     </div>
   </div>
 
-  <!-- DALL-E FOTOS REAIS — aparece após geração -->
-  <div id="dalle-section" style="display:none;margin-top:8px">
-    <div class="panel">
-      <div class="panel-hd" style="background:rgba(33,150,243,.06);border-bottom-color:rgba(33,150,243,.2)">
-        ✨ Fotos Reais com DALL-E 3
-        <span style="margin-left:auto;font-size:11px;color:#64B5F6;background:rgba(33,150,243,.15);padding:3px 10px;border-radius:10px;font-weight:600">Requer chave OpenAI</span>
-      </div>
-      <div class="panel-bd">
-        <div style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">
-          Claude analisa seu produto e DALL-E 3 gera <b>5 fotos reais</b> em ângulos profissionais.<br>
-          As imagens são geradas em <b>1024×1024px</b> e baixadas como PNG prontas para subir na Shopee.
-        </div>
-        <button class="btn-main" id="ph-gen-btn" onclick="phGen()" style="background:linear-gradient(135deg,#1565C0,#1976D2)">✨ Gerar 5 Fotos com DALL-E 3</button>
-        <div id="ph-prog" style="display:none;margin-top:12px">
-          <div class="prog-bar"><div class="prog-fill" id="ph-pf"></div></div>
-          <div class="prog-txt" id="ph-pt">Iniciando...</div>
-        </div>
-      </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SEÇÃO DALL-E 3 — sempre visível abaixo do formulário -->
+<!-- ============================================================ -->
+<div id="view-gen-dalle" style="margin-top:8px">
+  <div class="panel">
+    <div class="panel-hd" style="background:rgba(33,150,243,.07);border-bottom-color:rgba(33,150,243,.25)">
+      ✨ Gerador de Fotos com DALL-E 3
+      <span style="margin-left:auto;font-size:11px;color:#64B5F6;background:rgba(33,150,243,.15);padding:3px 10px;border-radius:10px;font-weight:600">Requer chave OpenAI no server.js</span>
     </div>
-    <div id="ph-results" style="display:none;margin-top:8px">
-      <div class="panel">
-        <div class="panel-hd">✨ Fotos Geradas · <span id="ph-dc" style="color:var(--o2)">0/5</span></div>
-        <div class="panel-bd">
-          <div class="angle-tabs" id="ph-tabs"></div>
-          <div id="ph-card"></div>
-          <div class="info-blk" style="margin-top:12px">📐 <b>Shopee:</b> 1:1 · mínimo 500px · máximo 9MB · clique em "⬇ Baixar PNG" para salvar cada foto</div>
+    <div class="panel-bd">
+      <div class="g2" style="gap:16px;align-items:start">
+        <!-- Upload separado para DALL-E -->
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">Foto do Produto para DALL-E</div>
+          <div id="ph-dz" class="upload-zone" style="padding:22px 14px;border-radius:10px" ondragover="dov(event,this)" ondragleave="dlv(this)" ondrop="phDrop(event,this)" onclick="document.getElementById('ph-fi').click()">
+            <input type="file" id="ph-fi" accept="image/*" onchange="phLoad(this.files[0])"/>
+            <div style="font-size:24px;margin-bottom:8px">📸</div>
+            <div style="font-size:13px;font-weight:600;margin-bottom:4px">Arraste ou clique</div>
+            <div style="font-size:11px;color:var(--mu)">JPG · PNG transparente · WEBP</div>
+          </div>
+          <div id="ph-preview-area" style="display:none;margin-top:10px">
+            <div style="background:repeating-conic-gradient(#1a1a28 0% 25%,#13131e 0% 50%) 0 0/16px 16px;border-radius:9px;overflow:hidden;border:1px solid var(--bd);margin-bottom:8px">
+              <img id="ph-preview" style="width:100%;display:block;max-height:180px;object-fit:contain" src="" alt=""/>
+            </div>
+            <button class="btn-sec" onclick="document.getElementById('ph-fi').click()" style="width:100%;font-size:12px">🔄 Trocar</button>
+          </div>
+        </div>
+        <!-- Info e botão -->
+        <div style="display:flex;flex-direction:column;gap:12px;justify-content:center;padding-top:20px">
+          <div class="info-blk" style="margin-bottom:0">
+            🤖 <b>Como funciona:</b><br>
+            1. Envie a foto do produto<br>
+            2. Claude analisa e descreve cada ângulo<br>
+            3. DALL-E 3 gera fotos reais 1024×1024px<br>
+            4. Baixe os PNGs prontos para Shopee
+          </div>
+          <div class="warn-blk" style="margin-bottom:0">
+            ⚠ Requer chave OpenAI configurada no <b>server.js</b> (variável <code>OPENAI_KEY</code>) ou no Render como <b>OPENAI_API_KEY</b>
+          </div>
+          <button class="btn-main" id="ph-gen-btn" onclick="phGen()" style="background:linear-gradient(135deg,#1565C0,#1976D2);width:100%;justify-content:center" disabled>
+            ✨ Gerar 5 Ângulos com DALL-E 3
+          </button>
+          <div id="ph-prog" style="display:none">
+            <div class="prog-bar"><div class="prog-fill" id="ph-pf"></div></div>
+            <div class="prog-txt" id="ph-pt">Iniciando...</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-</div>
+  <!-- RESULTADOS DALL-E -->
+  <div id="ph-results" style="display:none;margin-top:8px">
+    <div class="panel">
+      <div class="panel-hd">✨ Fotos Geradas com DALL-E 3 <span id="ph-dc" style="color:var(--o2);margin-left:8px;font-size:13px;font-weight:400">0/5</span></div>
+      <div class="panel-bd">
+        <div style="font-size:13px;color:var(--t2);margin-bottom:14px">Clique nas abas para navegar • Baixe cada foto em PNG pronto para Shopee</div>
+        <div class="angle-tabs" id="ph-tabs"></div>
+        <div id="ph-card"></div>
+        <div class="info-blk" style="margin-top:12px">📐 <b>Padrão Shopee:</b> 1:1 · mínimo 500×500px · máximo 9MB · fundo branco recomendado para capa</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- view-photos hidden, DALL-E results kept here -->
@@ -696,8 +719,7 @@ function loadImg(file){
     imgB64=b64;imgMime=mime;
     document.getElementById('img-preview').src=dataUrl;
     document.getElementById('img-preview-area').style.display='block';
-    document.getElementById('gen-canvas-area').style.display='block';
-    document.getElementById('dalle-section').style.display='block';
+    // no canvas in gen view
     toast('✓ Foto carregada! Agora gere o anúncio ou os cenários.','ok');
   });
 }

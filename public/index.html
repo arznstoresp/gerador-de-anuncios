@@ -451,6 +451,39 @@ main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24p
       <button class="btn-shopee" onclick="copyShopee()">🛒 Formato Shopee</button>
     </div>
   </div>
+
+  <!-- DALL-E FOTOS REAIS — aparece após geração -->
+  <div id="dalle-section" style="display:none;margin-top:8px">
+    <div class="panel">
+      <div class="panel-hd" style="background:rgba(33,150,243,.06);border-bottom-color:rgba(33,150,243,.2)">
+        ✨ Fotos Reais com DALL-E 3
+        <span style="margin-left:auto;font-size:11px;color:#64B5F6;background:rgba(33,150,243,.15);padding:3px 10px;border-radius:10px;font-weight:600">Requer chave OpenAI</span>
+      </div>
+      <div class="panel-bd">
+        <div style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">
+          Claude analisa seu produto e DALL-E 3 gera <b>5 fotos reais</b> em ângulos profissionais.<br>
+          As imagens são geradas em <b>1024×1024px</b> e baixadas como PNG prontas para subir na Shopee.
+        </div>
+        <button class="btn-main" id="ph-gen-btn" onclick="phGen()" style="background:linear-gradient(135deg,#1565C0,#1976D2)">✨ Gerar 5 Fotos com DALL-E 3</button>
+        <div id="ph-prog" style="display:none;margin-top:12px">
+          <div class="prog-bar"><div class="prog-fill" id="ph-pf"></div></div>
+          <div class="prog-txt" id="ph-pt">Iniciando...</div>
+        </div>
+      </div>
+    </div>
+    <div id="ph-results" style="display:none;margin-top:8px">
+      <div class="panel">
+        <div class="panel-hd">✨ Fotos Geradas · <span id="ph-dc" style="color:var(--o2)">0/5</span></div>
+        <div class="panel-bd">
+          <div class="angle-tabs" id="ph-tabs"></div>
+          <div id="ph-card"></div>
+          <div class="info-blk" style="margin-top:12px">📐 <b>Shopee:</b> 1:1 · mínimo 500px · máximo 9MB · clique em "⬇ Baixar PNG" para salvar cada foto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 </div>
 
 <!-- view-photos hidden, DALL-E results kept here -->
@@ -664,6 +697,7 @@ function loadImg(file){
     document.getElementById('img-preview').src=dataUrl;
     document.getElementById('img-preview-area').style.display='block';
     document.getElementById('gen-canvas-area').style.display='block';
+    document.getElementById('dalle-section').style.display='block';
     toast('✓ Foto carregada! Agora gere o anúncio ou os cenários.','ok');
   });
 }
@@ -731,10 +765,10 @@ async function callDalle(prompt,label){
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({prompt:fullPrompt,size:'1024x1024',quality:'standard',style:'natural'})
   });}catch(e){throw new Error('Erro de conexão com servidor DALL-E');}
-  const resp=resp2;
-  const json=await resp.json();
-  if(!resp.ok||json.error)throw new Error(json.error||'Erro DALL-E '+resp.status);
-  return json?.data?.[0]?.url||null;
+  const json=await resp2.json();
+  if(!resp2.ok||json.error)throw new Error(json.error||'Erro DALL-E '+resp2.status);
+  // Server returns base64 directly — no expiring URLs!
+  return json?.dataUrl||null;
 }
 
 // ================================================================
@@ -1539,7 +1573,11 @@ function phRenderCard(){
   const tags=(d.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
   let imgHtml='';
   if(r.imgUrl){
-    imgHtml=`<div class="angle-img-wrap"><img class="angle-img" src="${r.imgUrl}" alt="${r.lb}" crossorigin="anonymous"/><div class="angle-img-badge">DALL-E 3 · 1024×1024</div><a class="angle-dl" href="${r.imgUrl}" download="shopee_${r.lb.replace(/\s/g,'_').toLowerCase()}.jpg" target="_blank">⬇ Baixar foto</a></div>`;
+    imgHtml=`<div class="angle-img-wrap">
+      <img class="angle-img" src="${r.imgUrl}" alt="${r.lb}"/>
+      <div class="angle-img-badge">DALL-E 3 · 1024×1024px</div>
+      <button class="angle-dl" onclick="dlDalleImg('${r.imgUrl.substring(0,30)}',${phIdx})">⬇ Baixar PNG</button>
+    </div>`;
   }
   area.innerHTML=`<div class="angle-card">
     ${imgHtml}
@@ -1607,8 +1645,19 @@ async function phGen(){
 
 function phResetBtn(){
   const btn=document.getElementById('ph-gen-btn');
-  btn.disabled=false;btn.textContent='✦ Gerar 5 Ângulos + Fotos';
-  document.getElementById('ph-prog').style.display='none';
+  if(btn){btn.disabled=false;btn.textContent='✦ Gerar 5 Ângulos + Fotos';}
+  const prog=document.getElementById('ph-prog');
+  if(prog)prog.style.display='none';
+}
+
+function dlDalleImg(prefix,idx){
+  const r=phRes[idx];
+  if(!r||!r.imgUrl)return;
+  const a=document.createElement('a');
+  a.download='shopee-foto-ia-'+(idx+1)+'-'+r.lb.replace(/\s/g,'_').toLowerCase()+'.png';
+  a.href=r.imgUrl; // dataUrl from server
+  a.click();
+  toast('✓ Foto '+(idx+1)+' baixada em PNG!','ok');
 }
 
 // ================================================================

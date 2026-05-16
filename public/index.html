@@ -341,10 +341,10 @@ main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24p
   </div>
   <div class="main-nav">
     <button class="mnav on" onclick="showView('gen',this)">✦ Gerar Anúncio</button>
-    <button class="mnav" onclick="showView('photos',this)">📸 Fotos IA</button>
     <button class="mnav" onclick="showView('trends',this)">📈 Tendências</button>
     <button class="mnav" onclick="showView('seo',this)">🔍 SEO</button>
     <button class="mnav" onclick="showView('saved',this)">📦 Salvos <span id="nav-count" style="display:none;background:var(--or);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;margin-left:3px">0</span></button>
+    <button class="mnav" onclick="showView('photos',this)">✨ Fotos DALL-E</button>
   </div>
   <div class="hbadge">✦ 2026</div>
 </header>
@@ -352,89 +352,89 @@ main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24p
 <main>
 
 <!-- ============================================================ -->
-<!-- VIEW: GENERATOR -->
+<!-- VIEW: GENERATOR (UNIFICADO) -->
 <!-- ============================================================ -->
 <div id="view-gen">
 
-  <!-- UPLOAD -->
-  <div class="panel">
-    <div class="panel-hd">📸 Foto do Produto <span class="panel-hd-sub">A IA analisa e usa para gerar o anúncio</span></div>
-    <div class="panel-bd">
-      <div id="uz-main" class="upload-zone" ondragover="dov(event,this)" ondragleave="dlv(this)" ondrop="ddr(event,this)" onclick="document.getElementById('fi-main').click()">
-        <input type="file" id="fi-main" accept="image/*" onchange="loadImg(this.files[0])"/>
-        <div class="uz-icon">📸</div>
-        <div class="uz-title">Arraste ou clique para enviar</div>
-        <div class="uz-sub">JPG · PNG · WEBP · redimensionado automaticamente</div>
-        <div class="img-tags" style="margin-top:14px">
-          <span class="img-tag">Frente principal</span>
-          <span class="img-tag">45°</span>
-          <span class="img-tag">Lateral</span>
-          <span class="img-tag">Close-up</span>
-          <span class="img-tag">Vista superior</span>
-        </div>
-      </div>
-      <div id="img-preview-area" style="display:none;margin-top:16px">
-        <div class="g2" style="gap:14px">
-          <div class="img-preview-wrap">
-            <img id="img-preview" class="img-preview" src="" alt="produto"/>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:10px;justify-content:center">
-            <div class="ok-blk">✓ Foto carregada e otimizada! Preencha os dados abaixo e clique em Gerar.</div>
-            <button class="btn-sec" onclick="document.getElementById('fi-main').click()" style="width:100%">🔄 Trocar foto</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- LINHA 1: UPLOAD + DADOS DO PRODUTO -->
+  <div class="g2" style="gap:16px;margin-bottom:16px;align-items:start">
 
-  <!-- PRODUCT INFO -->
-  <div class="panel">
-    <div class="panel-hd">⚙ Informações do Produto <span class="panel-hd-sub">Quanto mais detalhes, melhor o resultado</span></div>
-    <div class="panel-bd">
-      <div class="g2" style="margin-bottom:16px">
-        <div class="fg"><label>Tipo de Produto *</label><input id="f_pt" class="inp" placeholder="Ex: Caneca personalizada, Almofada..."></div>
-        <div class="fg">
-          <label style="display:flex;align-items:center;justify-content:space-between">
-            Categoria Shopee
-            <span id="cat-auto-badge" style="display:none;font-size:9px;font-weight:700;color:#4CAF50;background:rgba(76,175,80,.15);padding:2px 7px;border-radius:8px;letter-spacing:.5px">✓ AUTO</span>
-          </label>
-          <div style="position:relative">
-            <input id="f_cat" class="inp" placeholder="Detectando automaticamente..." readonly
-              style="cursor:default;background:var(--s3);padding-right:110px"/>
-            <button onclick="autoDetectCategory()" id="cat-btn"
-              style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:var(--or);color:#fff;border:none;border-radius:7px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">
-              🔍 Detectar
-            </button>
-          </div>
-          <div style="font-size:11px;color:var(--mu);margin-top:3px">A IA detecta a melhor categoria Shopee para o produto</div>
+    <!-- COLUNA ESQUERDA: FOTO -->
+    <div class="panel" style="margin-bottom:0">
+      <div class="panel-hd">📸 Foto do Produto <span class="panel-hd-sub">PNG transparente ou fundo sólido</span></div>
+      <div class="panel-bd">
+        <div id="uz-main" class="upload-zone" style="padding:28px 16px" ondragover="dov(event,this)" ondragleave="dlv(this)" ondrop="ddr(event,this)" onclick="document.getElementById('fi-main').click()">
+          <input type="file" id="fi-main" accept="image/*" onchange="loadImg(this.files[0])"/>
+          <div class="uz-icon" style="width:56px;height:56px;font-size:26px;margin-bottom:12px">📸</div>
+          <div class="uz-title" style="font-size:16px">Arraste ou clique</div>
+          <div class="uz-sub">JPG · PNG · WEBP</div>
         </div>
-        <div class="fg"><label>Material / Técnica</label><input id="f_mat" class="inp" placeholder="Ex: Sublimação, MDF, Acrílico..."></div>
-        <div class="fg"><label>Ocasião / Público</label><input id="f_occ" class="inp" placeholder="Ex: Dia das Mães, Empresas..."></div>
-        <div class="fg"><label>Preço de Custo (R$)</label><input id="f_cp" class="inp" type="number" placeholder="Ex: 15.00" step="0.01"></div>
-        <div class="fg"><label>Marca</label><input id="f_brand" class="inp" placeholder="Ex: ArznStoreSP Personalizados"></div>
-        <div class="fg"><label>Peso Aprox. (kg)</label><input id="f_weight" class="inp" type="number" placeholder="Ex: 0.3" step="0.01"></div>
-        <div class="fg"><label>Diferenciais</label><input id="f_dif" class="inp" placeholder="Ex: frete grátis, caixa presente..."></div>
+        <div id="img-preview-area" style="display:none;margin-top:14px">
+          <div style="background:repeating-conic-gradient(#1a1a28 0% 25%,#13131e 0% 50%) 0 0/18px 18px;border-radius:10px;overflow:hidden;border:1px solid var(--bd);margin-bottom:10px">
+            <img id="img-preview" style="width:100%;display:block;max-height:220px;object-fit:contain" src="" alt="produto"/>
+          </div>
+          <button class="btn-sec" onclick="document.getElementById('fi-main').click()" style="width:100%;font-size:12px">🔄 Trocar foto</button>
+        </div>
+        <!-- CENÁRIOS CANVAS INTEGRADO -->
+        <div id="gen-canvas-area" style="display:none;margin-top:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <span style="font-size:12px;font-weight:600;color:var(--t2)">🎨 Cenários do Produto</span>
+            <button class="btn-grn" id="canvas-gen-btn" onclick="genCanvasMockups()" style="padding:5px 12px;font-size:11px">▶ Gerar</button>
+          </div>
+          <div id="canvas-results" style="display:none">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px" id="canvas-grid"></div>
+            <div class="info-blk" style="margin-top:10px;font-size:11px">💡 Baixe e use como fotos adicionais na Shopee</div>
+          </div>
+        </div>
       </div>
-      <div class="fg"><label>Informações Adicionais</label><textarea id="f_ai" class="ta" placeholder="Dimensões, variações disponíveis, qualquer detalhe extra..."></textarea></div>
     </div>
-    <div class="panel-ft">
-      <button class="btn-main" id="genBtn" onclick="generate()">✦ Gerar Anúncio Completo com IA</button>
-      <button class="btn-sec" onclick="resetForm()">Limpar</button>
+
+    <!-- COLUNA DIREITA: DADOS -->
+    <div class="panel" style="margin-bottom:0">
+      <div class="panel-hd">⚙ Dados do Produto <span class="panel-hd-sub">Quanto mais detalhes, melhor</span></div>
+      <div class="panel-bd">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="fg"><label>Tipo de Produto *</label><input id="f_pt" class="inp" placeholder="Ex: Caneca personalizada, Almofada..."></div>
+          <div class="fg">
+            <label style="display:flex;align-items:center;justify-content:space-between">
+              Categoria Shopee
+              <span id="cat-auto-badge" style="display:none;font-size:9px;font-weight:700;color:#22c55e;background:rgba(34,197,94,.15);padding:2px 7px;border-radius:8px">✓ AUTO</span>
+            </label>
+            <div style="position:relative">
+              <input id="f_cat" class="inp" placeholder="Detecta automaticamente ao preencher produto..." readonly style="cursor:default;background:var(--s3);padding-right:106px"/>
+              <button onclick="autoDetectCategory()" id="cat-btn" style="position:absolute;right:5px;top:50%;transform:translateY(-50%);background:var(--or);color:#fff;border:none;border-radius:7px;padding:5px 10px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap">🔍 Detectar</button>
+            </div>
+          </div>
+          <div class="g2" style="gap:10px;margin-bottom:0">
+            <div class="fg"><label>Material / Técnica</label><input id="f_mat" class="inp" placeholder="Ex: Sublimação, MDF..."></div>
+            <div class="fg"><label>Ocasião / Público</label><input id="f_occ" class="inp" placeholder="Ex: Dia das Mães..."></div>
+            <div class="fg"><label>Preço de Custo (R$)</label><input id="f_cp" class="inp" type="number" placeholder="Ex: 15.00" step="0.01"></div>
+            <div class="fg"><label>Marca</label><input id="f_brand" class="inp" placeholder="Ex: ArznStoreSP"></div>
+            <div class="fg"><label>Peso (kg)</label><input id="f_weight" class="inp" type="number" placeholder="Ex: 0.3" step="0.01"></div>
+            <div class="fg"><label>Diferenciais</label><input id="f_dif" class="inp" placeholder="Ex: frete grátis..."></div>
+          </div>
+          <div class="fg"><label>Informações Adicionais</label><textarea id="f_ai" class="ta" style="min-height:60px" placeholder="Dimensões, variações, qualquer detalhe extra..."></textarea></div>
+        </div>
+      </div>
+      <div class="panel-ft">
+        <button class="btn-main" id="genBtn" onclick="generate()">✦ Gerar Anúncio Completo</button>
+        <button class="btn-sec" onclick="resetForm()">Limpar</button>
+      </div>
     </div>
   </div>
 
   <!-- LOADING -->
-  <div class="panel" id="loadPanel" style="display:none;padding:40px 24px;text-align:center">
+  <div class="panel" id="loadPanel" style="display:none;padding:36px 24px;text-align:center">
     <div class="spinner"></div>
-    <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:6px">IA gerando seu anúncio completo...</div>
-    <div style="font-size:13px;color:var(--t2);margin-bottom:18px">Preenchendo todas as 7 abas da Shopee automaticamente</div>
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:5px">Gerando anúncio completo...</div>
+    <div style="font-size:13px;color:var(--t2);margin-bottom:16px">Preenchendo todas as 7 abas da Shopee automaticamente</div>
     <div class="steps" id="stepList"></div>
   </div>
 
   <!-- RESULT -->
   <div id="resultSection" style="display:none" class="slide">
     <div class="seo-banner" id="seoBanner"></div>
-    <div class="stabs" id="stabs">
+    <div class="stabs">
       <button class="stab on" onclick="switchTab('info',this)">📋 Info Básica</button>
       <button class="stab" onclick="switchTab('spec',this)">🔧 Especificação</button>
       <button class="stab" onclick="switchTab('desc',this)">📝 Descrição</button>
@@ -446,7 +446,7 @@ main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24p
     <div id="tabContent"></div>
     <div class="export-bar">
       <span class="export-lbl">Exportar:</span>
-      <button class="btn-grn" onclick="saveProduct()">💾 Salvar Produto</button>
+      <button class="btn-grn" onclick="saveProduct()">💾 Salvar</button>
       <button class="btn-sec" onclick="copyAll()">📄 Copiar Tudo</button>
       <button class="btn-sec" onclick="downloadTxt()">⬇ .TXT</button>
       <button class="btn-shopee" onclick="copyShopee()">🛒 Formato Shopee</button>
@@ -661,7 +661,15 @@ function showView(v,btn){
   });
   document.querySelectorAll('.mnav').forEach(b=>b.classList.remove('on'));
   if(btn)btn.classList.add('on');
+  else document.querySelector('.mnav').classList.add('on');
   if(v==='saved')renderSavedList();
+  // Sync photo to DALL-E tab if image loaded
+  if(v==='photos'&&imgB64){
+    phB64=imgB64;phMime=imgMime;
+    document.getElementById('ph-preview').src=document.getElementById('img-preview').src;
+    document.getElementById('ph-preview-area').style.display='block';
+    document.getElementById('ph-gen-btn').disabled=false;
+  }
 }
 
 // ================================================================
@@ -726,7 +734,8 @@ function loadImg(file){
     imgB64=b64;imgMime=mime;
     document.getElementById('img-preview').src=dataUrl;
     document.getElementById('img-preview-area').style.display='block';
-    toast('✓ Foto carregada!','ok');
+    document.getElementById('gen-canvas-area').style.display='block';
+    toast('✓ Foto carregada! Agora gere o anúncio ou os cenários.','ok');
   });
 }
 
@@ -1274,7 +1283,10 @@ const CANVAS_SCENES = [
 ];
 
 function genCanvasMockups(){
-  if(!phB64){toast('❌ Envie uma foto primeiro','err');return;}
+  // Use main image or photo image
+  if(!phB64&&imgB64){phB64=imgB64;phMime=imgMime;}
+  if(!phB64&&!imgB64){toast('❌ Envie uma foto primeiro','err');return;}
+  if(!phB64)phB64=imgB64;if(!phMime)phMime=imgMime;
   const btn=document.getElementById('canvas-gen-btn');
   btn.disabled=true;btn.textContent='⏳ Gerando cenários...';
   const grid=document.getElementById('canvas-grid');
@@ -1306,7 +1318,7 @@ function genCanvasMockups(){
     img.src='data:'+phMime+';base64,'+phB64;
   });
 
-  res.scrollIntoView({behavior:'smooth',block:'start'});
+  if(res.closest('#view-photos'))res.scrollIntoView({behavior:'smooth',block:'start'});
   btn.disabled=false;btn.textContent='🔄 Regerar Cenários';
   toast('✓ 6 cenários gerados!','ok');
 }

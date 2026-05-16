@@ -355,29 +355,17 @@ main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24p
 <!-- ============================================================ -->
 <div id="view-gen">
 
-  <!-- LINHA 1: UPLOAD + DADOS DO PRODUTO -->
-  <div class="g2" style="gap:16px;margin-bottom:16px;align-items:start">
+  <!-- DADOS DO PRODUTO -->
+  <div style="margin-bottom:16px">
 
-    <!-- COLUNA ESQUERDA: FOTO DO PRODUTO -->
-    <div class="panel" style="margin-bottom:0">
-      <div class="panel-hd">📸 Foto do Produto <span class="panel-hd-sub">PNG transparente ou fundo sólido</span></div>
-      <div class="panel-bd">
-        <div id="uz-main" class="upload-zone" style="padding:28px 16px" ondragover="dov(event,this)" ondragleave="dlv(this)" ondrop="ddr(event,this)" onclick="document.getElementById('fi-main').click()">
-          <input type="file" id="fi-main" accept="image/*" onchange="loadImg(this.files[0])"/>
-          <div class="uz-icon" style="width:56px;height:56px;font-size:26px;margin-bottom:12px">📸</div>
-          <div class="uz-title" style="font-size:16px">Arraste ou clique</div>
-          <div class="uz-sub">JPG · PNG · WEBP</div>
-        </div>
-        <div id="img-preview-area" style="display:none;margin-top:14px">
-          <div style="background:repeating-conic-gradient(#1a1a28 0% 25%,#13131e 0% 50%) 0 0/18px 18px;border-radius:10px;overflow:hidden;border:1px solid var(--bd);margin-bottom:10px">
-            <img id="img-preview" style="width:100%;display:block;max-height:220px;object-fit:contain" src="" alt="produto"/>
-          </div>
-          <button class="btn-sec" onclick="document.getElementById('fi-main').click()" style="width:100%;font-size:12px">🔄 Trocar foto</button>
-        </div>
-      </div>
+    <!-- foto oculta mas mantida para IA usar no anúncio -->
+    <div style="display:none">
+      <input type="file" id="fi-main" accept="image/*" onchange="loadImg(this.files[0])"/>
+      <img id="img-preview" src="" alt=""/>
+      <div id="img-preview-area"></div>
     </div>
 
-    <!-- COLUNA DIREITA: DADOS -->
+    <!-- DADOS -->
     <div class="panel" style="margin-bottom:0">
       <div class="panel-hd">⚙ Dados do Produto <span class="panel-hd-sub">Quanto mais detalhes, melhor</span></div>
       <div class="panel-bd">

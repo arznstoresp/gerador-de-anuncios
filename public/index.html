@@ -344,7 +344,6 @@ main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24p
     <button class="mnav" onclick="showView('trends',this)">📈 Tendências</button>
     <button class="mnav" onclick="showView('seo',this)">🔍 SEO</button>
     <button class="mnav" onclick="showView('saved',this)">📦 Salvos <span id="nav-count" style="display:none;background:var(--or);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;margin-left:3px">0</span></button>
-    <button class="mnav" onclick="showView('photos',this)">✨ Fotos DALL-E</button>
   </div>
   <div class="hbadge">✦ 2026</div>
 </header>
@@ -454,87 +453,17 @@ main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24p
   </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- VIEW: PHOTOS (DALL-E) -->
-<!-- ============================================================ -->
+<!-- view-photos hidden, DALL-E results kept here -->
 <div id="view-photos" style="display:none">
-  <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px">📸 Imagens do Produto</div>
-  <div style="font-size:14px;color:var(--t2);margin-bottom:24px">Gere cenários atrativos com Canvas (grátis) ou fotos reais com DALL-E 3 (requer chave OpenAI)</div>
-
-  <!-- UPLOAD -->
-  <div class="panel" style="margin-bottom:20px">
-    <div class="panel-hd">📤 Foto do Produto <span class="panel-hd-sub">PNG com fundo transparente ou fundo sólido — redimensionado automaticamente</span></div>
-    <div class="panel-bd">
-      <div id="ph-upload-area">
-        <div id="ph-dz" class="upload-zone" ondragover="dov(event,this)" ondragleave="dlv(this)" ondrop="phDrop(event,this)" onclick="document.getElementById('ph-fi').click()">
-          <input type="file" id="ph-fi" accept="image/*" onchange="phLoad(this.files[0])"/>
-          <div class="uz-icon">📸</div>
-          <div class="uz-title">Arraste ou clique para enviar</div>
-          <div class="uz-sub">JPG · PNG transparente · WEBP · fundo branco ou transparente</div>
-        </div>
-      </div>
-      <div id="ph-preview-area" style="display:none">
-        <div class="g2" style="gap:14px">
-          <div class="img-preview-wrap" style="background:repeating-conic-gradient(#1a1a24 0% 25%, #111118 0% 50%) 0 0 / 20px 20px">
-            <img id="ph-preview" class="img-preview" src="" alt=""/>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
-            <div class="ok-blk">✓ Foto carregada! Escolha o tipo de geração abaixo.</div>
-            <button class="btn-sec" onclick="document.getElementById('ph-fi').click()" style="width:100%">🔄 Trocar foto</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TWO OPTIONS -->
-  <div class="g2" style="gap:16px;margin-bottom:20px">
-
-    <!-- CANVAS MOCKUPS -->
-    <div class="panel" style="margin-bottom:0">
-      <div class="panel-hd" style="background:rgba(76,175,80,.06);border-bottom-color:rgba(76,175,80,.2)">
-        🎨 Cenários com Canvas
-        <span style="margin-left:auto;font-size:11px;font-weight:600;color:#4CAF50;background:rgba(76,175,80,.15);padding:3px 10px;border-radius:10px">Grátis — Sem API</span>
-      </div>
-      <div class="panel-bd">
-        <div style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">Gera <b>6 cenários</b> com seu produto em ambientes atrativos — fundo branco profissional, lifestyle, dark premium, flat lay, promoção e presente. Download em HD.</div>
-        <button class="btn-grn" id="canvas-gen-btn" onclick="genCanvasMockups()" style="width:100%;justify-content:center">🎨 Gerar 6 Cenários</button>
-      </div>
-    </div>
-
-    <!-- DALL-E -->
-    <div class="panel" style="margin-bottom:0">
-      <div class="panel-hd" style="background:rgba(33,150,243,.06);border-bottom-color:rgba(33,150,243,.2)">
-        ✨ Fotos Reais com DALL-E 3
-        <span style="margin-left:auto;font-size:11px;font-weight:600;color:#64B5F6;background:rgba(33,150,243,.15);padding:3px 10px;border-radius:10px">Requer chave OpenAI</span>
-      </div>
-      <div class="panel-bd">
-        <div style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">Claude analisa o produto e DALL-E 3 gera <b>5 fotos reais</b> em ângulos profissionais prontos para Shopee. Qualidade fotorrealista.</div>
-        <button class="btn-main" id="ph-gen-btn" onclick="phGen()" style="width:100%;justify-content:center;background:linear-gradient(135deg,#1565C0,#1976D2)">✨ Gerar 5 Fotos Reais</button>
-        <div id="ph-prog" style="display:none;margin-top:10px">
-          <div class="prog-bar"><div class="prog-fill" id="ph-pf"></div></div>
-          <div class="prog-txt" id="ph-pt">Iniciando...</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CANVAS RESULTS -->
-  <div id="canvas-results" style="display:none">
-    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px">🎨 Cenários Gerados</div>
-    <div style="font-size:13px;color:var(--t2);margin-bottom:16px">Clique para selecionar · Passe o mouse para baixar em HD (1000×1000px)</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px" id="canvas-grid"></div>
-    <div class="info-blk" style="margin-top:14px">💡 Use estes cenários como fotos adicionais na Shopee. Recomendado: fundo branco como capa principal.</div>
-  </div>
-
-  <!-- DALL-E RESULTS -->
-  <div id="ph-results" style="display:none;margin-top:20px">
+  <div id="ph-results" style="display:none">
     <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px">✨ Fotos Geradas com DALL-E 3</div>
     <div style="font-size:13px;color:var(--t2);margin-bottom:14px">Fotos profissionais prontas para Shopee · <span id="ph-dc" style="color:var(--o2)">0/5</span></div>
     <div class="angle-tabs" id="ph-tabs"></div>
     <div id="ph-card"></div>
-    <div class="info-blk" style="margin-top:14px">📐 <b>Requisitos Shopee:</b> 1:1 · mínimo 500×500px · máximo 9MB · fundo branco para capa</div>
   </div>
+  <!-- hidden elements needed by phGen -->
+  <button id="ph-gen-btn" style="display:none" onclick="phGen()"></button>
+  <div id="ph-prog" style="display:none"><div class="prog-bar"><div class="prog-fill" id="ph-pf"></div></div><div class="prog-txt" id="ph-pt"></div></div>
 </div>
 
 <!-- ============================================================ -->
@@ -1275,52 +1204,55 @@ function downloadExcel(){
 // ================================================================
 const CANVAS_SCENES = [
   {id:0, name:'Fundo Branco Profissional', draw:'clean'},
-  {id:1, name:'Mesa Lifestyle Madeira',    draw:'wood'},
-  {id:2, name:'Dark Premium Elegante',     draw:'dark'},
-  {id:3, name:'Flat Lay Vista Aérea',      draw:'flat'},
-  {id:4, name:'Banner Promocional Shopee', draw:'promo'},
-  {id:5, name:'Cenário Presente & Gift',   draw:'gift'},
+  {id:1, name:'Lifestyle Quente',          draw:'warm'},
+  {id:2, name:'Dark Premium',              draw:'dark'},
+  {id:3, name:'Flat Lay Pastel',           draw:'flat'},
+  {id:4, name:'Banner Shopee',             draw:'promo'},
+  {id:5, name:'Cenário Gift',              draw:'gift'},
 ];
 
 function genCanvasMockups(){
-  // Use main image or photo image
-  if(!phB64&&imgB64){phB64=imgB64;phMime=imgMime;}
-  if(!phB64&&!imgB64){toast('❌ Envie uma foto primeiro','err');return;}
-  if(!phB64)phB64=imgB64;if(!phMime)phMime=imgMime;
+  if(!imgB64&&!phB64){toast('❌ Envie uma foto primeiro','err');return;}
+  const b64 = imgB64||phB64;
+  const mime = imgMime||phMime;
   const btn=document.getElementById('canvas-gen-btn');
-  btn.disabled=true;btn.textContent='⏳ Gerando cenários...';
+  if(btn){btn.disabled=true;btn.textContent='⏳ Gerando...';}
+
+  // Show results in gen view
   const grid=document.getElementById('canvas-grid');
   const res=document.getElementById('canvas-results');
-  res.style.display='block';
-  grid.innerHTML='';
+  if(grid)grid.innerHTML='';
+  if(res)res.style.display='block';
 
-  CANVAS_SCENES.forEach((scene,idx)=>{
-    const wrap=document.createElement('div');
-    wrap.style.cssText='border-radius:12px;overflow:hidden;border:2px solid var(--bd);cursor:pointer;transition:all .2s;position:relative;background:var(--s2)';
-    wrap.onmouseover=()=>wrap.style.borderColor='var(--or)';
-    wrap.onmouseout=()=>wrap.style.borderColor='var(--bd)';
+  const img=new Image();
+  img.onload=()=>{
+    CANVAS_SCENES.forEach((scene,idx)=>{
+      const canvas=document.createElement('canvas');
+      canvas.width=1000;canvas.height=1000;
+      canvas.id='cv_'+idx;
 
-    const canvas=document.createElement('canvas');
-    canvas.width=1000;canvas.height=1000;
-    canvas.style.cssText='width:100%;display:block;aspect-ratio:1';
-    canvas.id='cv_'+idx;
+      const wrap=document.createElement('div');
+      wrap.style.cssText='border-radius:10px;overflow:hidden;border:1.5px solid var(--bd);cursor:pointer;transition:all .2s;position:relative;background:var(--s2)';
+      wrap.onmouseover=()=>wrap.style.borderColor='var(--or)';
+      wrap.onmouseout=()=>wrap.style.borderColor='var(--bd)';
 
-    const lbl=document.createElement('div');
-    lbl.style.cssText='padding:10px 12px;font-size:12px;color:var(--t2);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--bd)';
-    lbl.innerHTML=`<span style="font-weight:500">${scene.name}</span><button onclick="dlCanvas(${idx},event)" style="background:var(--or);color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600">⬇ HD</button>`;
+      const lbl=document.createElement('div');
+      lbl.style.cssText='padding:8px 10px;font-size:11px;font-weight:600;color:var(--t2);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--bd);background:var(--s2)';
+      lbl.innerHTML=`<span>${scene.name}</span><button onclick="dlCanvas(${idx},event)" style="background:var(--or);color:#fff;border:none;border-radius:5px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:700">⬇ HD</button>`;
 
-    wrap.appendChild(canvas);
-    wrap.appendChild(lbl);
-    grid.appendChild(wrap);
+      canvas.style.cssText='width:100%;display:block;aspect-ratio:1';
+      wrap.appendChild(canvas);
+      wrap.appendChild(lbl);
+      if(grid)grid.appendChild(wrap);
 
-    const img=new Image();
-    img.onload=()=>drawScene(canvas,img,scene.draw,idx);
-    img.src='data:'+phMime+';base64,'+phB64;
-  });
+      drawScene(canvas,img,scene.draw,b64,mime);
+    });
 
-  if(res.closest('#view-photos'))res.scrollIntoView({behavior:'smooth',block:'start'});
-  btn.disabled=false;btn.textContent='🔄 Regerar Cenários';
-  toast('✓ 6 cenários gerados!','ok');
+    if(btn){btn.disabled=false;btn.textContent='🔄 Regerar Cenários';}
+    toast('✓ 6 cenários gerados!','ok');
+  };
+  img.onerror=()=>{toast('❌ Erro ao carregar imagem','err');if(btn){btn.disabled=false;btn.textContent='▶ Gerar';}};
+  img.src='data:'+mime+';base64,'+b64;
 }
 
 function dlCanvas(idx,e){
@@ -1328,253 +1260,212 @@ function dlCanvas(idx,e){
   const c=document.getElementById('cv_'+idx);
   if(!c)return;
   const a=document.createElement('a');
-  a.download='cenario-shopee-'+(idx+1)+'-hd.png';
+  a.download='shopee-cenario-'+(idx+1)+'-hd.png';
   a.href=c.toDataURL('image/png');
   a.click();
   toast('✓ Cenário '+(idx+1)+' baixado em HD!','ok');
 }
 
-function drawScene(canvas,img,type,idx){
+// Draw product with white/neutral bg — handles any source image
+function drawProductOnScene(ctx, img, cx, cy, size, angle, shadow){
+  ctx.save();
+  ctx.translate(cx, cy);
+  if(angle) ctx.rotate(angle);
+  if(shadow){
+    ctx.shadowColor='rgba(0,0,0,0.4)';
+    ctx.shadowBlur=size*0.14;
+    ctx.shadowOffsetX=0;
+    ctx.shadowOffsetY=size*0.06;
+  }
+  ctx.drawImage(img, -size/2, -size/2, size, size);
+  ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetX=0; ctx.shadowOffsetY=0;
+  ctx.restore();
+}
+
+function drawScene(canvas, img, type, b64, mime){
   const ctx=canvas.getContext('2d');
-  const W=1000,H=1000;
+  const W=1000, H=1000;
+  const T=(t,x,y,font,color,align='center')=>{ctx.fillStyle=color;ctx.font=font;ctx.textAlign=align;ctx.fillText(t,x,y);ctx.textAlign='center';};
+  const RR=(x,y,w,h,r)=>{ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();};
 
-  // Helpers
-  const rr=(x,y,w,h,r)=>{ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();};
-  const txt=(t,x,y,font,color,align='center')=>{ctx.fillStyle=color;ctx.font=font;ctx.textAlign=align;ctx.fillText(t,x,y);ctx.textAlign='center';};
-  const shadow=(blur,color,ox=0,oy=0)=>{ctx.shadowBlur=blur;ctx.shadowColor=color;ctx.shadowOffsetX=ox;ctx.shadowOffsetY=oy;};
-  const noShadow=()=>{ctx.shadowBlur=0;ctx.shadowColor='transparent';ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;};
-
-  const drawProduct=(cx,cy,size,angle=0,hasShadow=true)=>{
-    ctx.save();
-    ctx.translate(cx,cy);
-    if(angle)ctx.rotate(angle);
-    if(hasShadow){shadow(size*.18,'rgba(0,0,0,.35)',0,size*.08);}
-    ctx.drawImage(img,-size/2,-size/2,size,size);
-    noShadow();
-    ctx.restore();
-  };
+  const PROD_SIZE = 580;
+  const PROD_CX = W/2;
+  const PROD_CY = H*0.44;
 
   if(type==='clean'){
-    // FUNDO BRANCO GRADIENTE
-    const bg=ctx.createLinearGradient(0,0,0,H);
-    bg.addColorStop(0,'#FEFEFE');bg.addColorStop(1,'#F2F2F2');
-    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-    // Grid pattern sutil
-    ctx.strokeStyle='rgba(0,0,0,.03)';ctx.lineWidth=1;
-    for(let i=0;i<W;i+=60){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,H);ctx.stroke();}
-    for(let i=0;i<H;i+=60){ctx.beginPath();ctx.moveTo(0,i);ctx.lineTo(W,i);ctx.stroke();}
-    // Sombra chão
-    const sg=ctx.createRadialGradient(W/2,H*.73,8,W/2,H*.73,230);
-    sg.addColorStop(0,'rgba(0,0,0,.15)');sg.addColorStop(1,'transparent');
-    ctx.fillStyle=sg;ctx.fillRect(0,0,W,H);
-    // Produto centralizado
-    drawProduct(W/2,H*.45,580);
-    // Linha laranja bottom
-    ctx.fillStyle='#FF5722';ctx.fillRect(0,H-100,W,100);
-    // Texto
-    txt('PRODUTO PERSONALIZADO',W/2,H-62,'bold 26px DM Sans,Arial','#fff');
-    txt('Qualidade • Entrega Rápida • Garantia',W/2,H-30,'16px DM Sans,Arial','rgba(255,255,255,.75)');
-    // Badge top
-    ctx.fillStyle='#FF5722';rr(30,30,200,48,8);ctx.fill();
-    txt('✓ PERSONALIZADO',130,60,'bold 17px DM Sans,Arial','#fff');
+    // Pure white background - Shopee standard
+    ctx.fillStyle='#FFFFFF'; ctx.fillRect(0,0,W,H);
+    // Subtle bottom shadow on floor
+    const sg=ctx.createRadialGradient(W/2,H*0.75,10,W/2,H*0.75,280);
+    sg.addColorStop(0,'rgba(0,0,0,0.12)'); sg.addColorStop(1,'transparent');
+    ctx.fillStyle=sg; ctx.fillRect(0,0,W,H);
+    // Product
+    drawProductOnScene(ctx,img,PROD_CX,PROD_CY,PROD_SIZE,0,true);
+    // Bottom bar
+    ctx.fillStyle='#FF6B00'; ctx.fillRect(0,H-90,W,90);
+    T('Produto Personalizado · Qualidade Garantida',W/2,H-52,'bold 24px Arial','#fff');
+    T('Entrega para todo o Brasil',W/2,H-22,'16px Arial','rgba(255,255,255,0.8)');
+    // Top badge
+    ctx.fillStyle='#FF6B00'; RR(28,28,210,46,8); ctx.fill();
+    T('✓ PERSONALIZADO',133,56,'bold 18px Arial','#fff');
 
-  } else if(type==='wood'){
-    // MESA DE MADEIRA LIFESTYLE
-    // Parede
-    const wall=ctx.createLinearGradient(0,0,0,H*.55);
-    wall.addColorStop(0,'#FFF8F0');wall.addColorStop(1,'#FDEFD8');
-    ctx.fillStyle=wall;ctx.fillRect(0,0,W,H);
-    // Mesa madeira
-    const wood=ctx.createLinearGradient(0,H*.55,0,H);
-    wood.addColorStop(0,'#C8945A');wood.addColorStop(.3,'#B07840');wood.addColorStop(1,'#8B5E30');
-    ctx.fillStyle=wood;ctx.fillRect(0,H*.55,W,H);
-    // Grão da madeira
-    ctx.strokeStyle='rgba(0,0,0,.06)';ctx.lineWidth=2;
-    for(let i=0;i<8;i++){ctx.beginPath();ctx.moveTo(0,H*.56+i*18);ctx.bezierCurveTo(W*.3,H*.54+i*18,W*.7,H*.58+i*18,W,H*.55+i*18);ctx.stroke();}
-    // Borda da mesa highlight
-    ctx.fillStyle='#D4A06A';ctx.fillRect(0,H*.55,W,10);
-    // Sombra produto na mesa
-    const ps=ctx.createRadialGradient(W/2,H*.6,5,W/2,H*.6,200);
-    ps.addColorStop(0,'rgba(0,0,0,.3)');ps.addColorStop(1,'transparent');
-    ctx.fillStyle=ps;ctx.fillRect(0,0,W,H);
-    // Decoração: mini círculos bokeh
-    [[80,100,35,'rgba(255,180,80,.3)'],[880,80,50,'rgba(255,140,60,.2)'],[900,200,25,'rgba(255,200,100,.25)']].forEach(([x,y,r,c])=>{ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();});
-    // Produto
-    drawProduct(W/2,H*.42,560,0.02);
-    // Ribbon top-left
-    ctx.fillStyle='#E65100';rr(0,30,260,54,0);ctx.fill();
-    ctx.beginPath();ctx.moveTo(260,30);ctx.lineTo(290,57);ctx.lineTo(260,84);ctx.fill();
-    txt('🎁 PRESENTE ESPECIAL',130,63,'bold 19px DM Sans,Arial','#fff');
-    // Preço bottom-right
-    ctx.fillStyle='rgba(0,0,0,.72)';rr(W-220,H-110,210,90,12);ctx.fill();
-    txt('A partir de',W-115,H-82,'13px DM Sans,Arial','rgba(255,255,255,.6)');
-    txt('R$ 49,90',W-115,H-45,'bold 38px DM Sans,Arial','#FFD700');
+  } else if(type==='warm'){
+    // Warm gradient lifestyle
+    const bg=ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#FFF9F4'); bg.addColorStop(1,'#FFE8D0');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    // Surface line
+    ctx.fillStyle='rgba(210,150,80,0.2)'; ctx.fillRect(0,H*0.72,W,H*(1-0.72));
+    // Warm glow behind product
+    const glow=ctx.createRadialGradient(W/2,PROD_CY,20,W/2,PROD_CY,320);
+    glow.addColorStop(0,'rgba(255,140,60,0.18)'); glow.addColorStop(1,'transparent');
+    ctx.fillStyle=glow; ctx.fillRect(0,0,W,H);
+    // Decorative circles
+    [[80,90,45,'rgba(255,160,80,0.25)'],[880,70,55,'rgba(255,130,60,0.2)'],[920,300,30,'rgba(255,180,100,0.2)']].forEach(([x,y,r,c])=>{ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();});
+    // Shadow under product
+    const ps=ctx.createRadialGradient(W/2,H*0.7,5,W/2,H*0.7,200);
+    ps.addColorStop(0,'rgba(0,0,0,0.2)'); ps.addColorStop(1,'transparent');
+    ctx.fillStyle=ps; ctx.fillRect(0,0,W,H);
+    // Product
+    drawProductOnScene(ctx,img,PROD_CX,PROD_CY,PROD_SIZE,0.015,true);
+    // Gift ribbon
+    ctx.fillStyle='#E65100'; RR(0,24,268,56,0); ctx.fill();
+    ctx.beginPath();ctx.moveTo(268,24);ctx.lineTo(298,52);ctx.lineTo(268,80);ctx.fill();
+    T('🎁 PRESENTE ESPECIAL',134,58,'bold 20px Arial','#fff');
+    // Price bottom right
+    ctx.fillStyle='rgba(0,0,0,0.72)'; RR(W-230,H-108,212,82,12); ctx.fill();
+    T('A partir de',W-124,H-80,'13px Arial','rgba(255,255,255,0.65)');
+    T('R$ 49,90',W-124,H-44,'bold 36px Arial','#FFD700');
 
   } else if(type==='dark'){
-    // DARK PREMIUM
-    ctx.fillStyle='#070B14';ctx.fillRect(0,0,W,H);
-    // Glow central
-    const g1=ctx.createRadialGradient(W/2,H/2,40,W/2,H/2,480);
-    g1.addColorStop(0,'rgba(255,87,34,.22)');g1.addColorStop(.5,'rgba(255,87,34,.07)');g1.addColorStop(1,'transparent');
-    ctx.fillStyle=g1;ctx.fillRect(0,0,W,H);
-    // Corner accent
-    const g2=ctx.createRadialGradient(0,H,0,0,H,400);
-    g2.addColorStop(0,'rgba(255,87,34,.15)');g2.addColorStop(1,'transparent');
-    ctx.fillStyle=g2;ctx.fillRect(0,0,W,H);
-    // Linhas geométricas
-    ctx.strokeStyle='rgba(255,87,34,.1)';ctx.lineWidth=1;
-    for(let i=0;i<6;i++){ctx.beginPath();ctx.moveTo(0,i*180+40);ctx.lineTo(W,i*180-40);ctx.stroke();}
-    // Hexágonos
-    ctx.strokeStyle='rgba(255,255,255,.04)';ctx.lineWidth=1;
-    for(let r=0;r<4;r++)for(let c=0;c<5;c++){
-      const hx=c*240+r*120-60,hy=r*200-80;
-      ctx.beginPath();
-      for(let i=0;i<6;i++){const a=i*Math.PI/3-Math.PI/6;const [x,y]=[hx+65*Math.cos(a),hy+65*Math.sin(a)];i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
-      ctx.closePath();ctx.stroke();
-    }
-    // Platform glow
-    const pg=ctx.createRadialGradient(W/2,H*.65,0,W/2,H*.65,280);
-    pg.addColorStop(0,'rgba(255,87,34,.3)');pg.addColorStop(.5,'rgba(255,87,34,.1)');pg.addColorStop(1,'transparent');
-    ctx.fillStyle=pg;ctx.fillRect(0,0,W,H);
-    // Elipse plataforma
-    ctx.fillStyle='rgba(255,87,34,.18)';ctx.beginPath();ctx.ellipse(W/2,H*.67,240,42,0,0,Math.PI*2);ctx.fill();
-    // Produto
-    drawProduct(W/2,H*.44,560,0,false);
-    // Título topo
-    ctx.fillStyle='rgba(255,87,34,.8)';ctx.fillRect(W/2-90,32,180,4);
-    txt('PERSONALIZADO',W/2,30,'bold 20px DM Sans,Arial','rgba(255,255,255,.5)');
-    txt('PREMIUM',W/2,82,'bold 58px DM Sans,Arial','#FF5722');
-    ctx.fillStyle='rgba(255,87,34,.8)';ctx.fillRect(W/2-90,96,180,4);
-    // Preço
-    ctx.fillStyle='rgba(255,255,255,.07)';rr(W/2-130,H-148,260,98,12);ctx.fill();
-    ctx.strokeStyle='rgba(255,87,34,.4)';ctx.lineWidth=1;rr(W/2-130,H-148,260,98,12);ctx.stroke();
-    txt('R$ 49,90',W/2,H-82,'bold 48px DM Sans,Arial','#FF5722');
-    txt('À VISTA · FRETE GRÁTIS',W/2,H-48,'14px DM Sans,Arial','rgba(255,255,255,.5)');
-    // Footer
-    ctx.fillStyle='rgba(255,255,255,.05)';ctx.fillRect(0,H-34,W,34);
-    txt('Produto Personalizado · Qualidade Garantida · Entrega Rápida',W/2,H-12,'12px DM Sans,Arial','rgba(255,255,255,.35)');
+    // Dark premium
+    ctx.fillStyle='#060912'; ctx.fillRect(0,0,W,H);
+    // Glow
+    const g1=ctx.createRadialGradient(W/2,H*0.45,30,W/2,H*0.45,460);
+    g1.addColorStop(0,'rgba(255,107,0,0.22)'); g1.addColorStop(0.5,'rgba(255,107,0,0.06)'); g1.addColorStop(1,'transparent');
+    ctx.fillStyle=g1; ctx.fillRect(0,0,W,H);
+    // Subtle lines
+    ctx.strokeStyle='rgba(255,107,0,0.08)'; ctx.lineWidth=1;
+    for(let i=0;i<7;i++){ctx.beginPath();ctx.moveTo(0,i*160+20);ctx.lineTo(W,i*160-20);ctx.stroke();}
+    // Platform
+    const pg=ctx.createRadialGradient(W/2,H*0.68,0,W/2,H*0.68,250);
+    pg.addColorStop(0,'rgba(255,107,0,0.28)'); pg.addColorStop(0.5,'rgba(255,107,0,0.08)'); pg.addColorStop(1,'transparent');
+    ctx.fillStyle=pg; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='rgba(255,107,0,0.15)'; ctx.beginPath(); ctx.ellipse(W/2,H*0.69,230,38,0,0,Math.PI*2); ctx.fill();
+    // Product
+    drawProductOnScene(ctx,img,PROD_CX,PROD_CY,PROD_SIZE,0,false);
+    // Title
+    ctx.fillStyle='rgba(255,107,0,0.7)'; ctx.fillRect(W/2-80,34,160,3);
+    T('PERSONALIZADO',W/2,32,'bold 18px Arial','rgba(255,255,255,0.45)');
+    T('PREMIUM',W/2,80,'bold 56px Arial','#FF6B00');
+    ctx.fillStyle='rgba(255,107,0,0.7)'; ctx.fillRect(W/2-80,94,160,3);
+    // Price
+    ctx.fillStyle='rgba(255,255,255,0.06)'; RR(W/2-130,H-148,260,100,12); ctx.fill();
+    ctx.strokeStyle='rgba(255,107,0,0.35)'; ctx.lineWidth=1; RR(W/2-130,H-148,260,100,12); ctx.stroke();
+    T('R$ 49,90',W/2,H-82,'bold 46px Arial','#FF6B00');
+    T('FRETE GRÁTIS · QUALIDADE',W/2,H-48,'13px Arial','rgba(255,255,255,0.45)');
+    ctx.fillStyle='rgba(255,255,255,0.05)'; ctx.fillRect(0,H-32,W,32);
+    T('Produto Personalizado · Entrega para todo o Brasil',W/2,H-11,'11px Arial','rgba(255,255,255,0.3)');
 
   } else if(type==='flat'){
-    // FLAT LAY VISTA AÉREA
-    // Fundo linho texturizado
-    ctx.fillStyle='#F5EDE0';ctx.fillRect(0,0,W,H);
-    // Textura
-    for(let i=0;i<5000;i++){
-      const x=Math.random()*W,y=Math.random()*H;
-      ctx.fillStyle=`rgba(${Math.random()>.5?180:210},${Math.random()>.5?155:185},${Math.random()>.5?130:160},.04)`;
-      ctx.fillRect(x,y,2,2);
-    }
-    // Círculos decorativos pastel
-    [[110,110,75,'rgba(255,182,193,.45)'],[880,90,55,'rgba(255,218,185,.55)'],[95,890,65,'rgba(176,224,230,.45)'],[885,885,85,'rgba(255,160,122,.4)'],[W/2,40,42,'rgba(221,160,221,.4)']].forEach(([x,y,r,c])=>{ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();});
-    // Folhas decorativas
-    ctx.fillStyle='rgba(144,238,144,.55)';
-    [[190,300],[820,320],[180,760],[820,720]].forEach(([x,y])=>{
-      ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI/4);ctx.beginPath();ctx.ellipse(0,0,22,11,0,0,Math.PI*2);ctx.fill();ctx.restore();
-    });
-    // Borda pontilhada
-    ctx.strokeStyle='rgba(180,120,80,.3)';ctx.lineWidth=2.5;ctx.setLineDash([10,10]);
-    ctx.strokeRect(32,32,W-64,H-64);ctx.setLineDash([]);
-    // Cantos
-    [[54,54],[W-54,54],[54,H-54],[W-54,H-54]].forEach(([x,y])=>{ctx.fillStyle='rgba(180,120,80,.35)';ctx.beginPath();ctx.arc(x,y,9,0,Math.PI*2);ctx.fill();});
-    // Sombra produto
-    ctx.fillStyle='rgba(0,0,0,.1)';ctx.beginPath();ctx.ellipse(W/2+18,H/2+22,240,32,0,0,Math.PI*2);ctx.fill();
-    // Produto rotacionado
-    drawProduct(W/2,H/2,-0.07,0,true);
-    // Tag preço bottom-right
-    ctx.fillStyle='#C8845A';rr(W-270,H-82,250,62,8);ctx.fill();
-    ctx.beginPath();ctx.moveTo(W-270,H-72);ctx.lineTo(W-295,H-51);ctx.lineTo(W-270,H-30);ctx.fill();
-    txt('✦ PERSONALIZADO',W-145,H-44,'bold 19px DM Sans,Arial','#fff');
-    // Label top
-    ctx.fillStyle='rgba(200,132,90,.9)';rr(62,62,300,58,7);ctx.fill();
-    txt('VISTA DO PRODUTO',212,84,'bold 15px DM Sans,Arial','rgba(255,255,255,.7)');
-    txt('R$ 49,90',212,108,'bold 22px DM Sans,Arial','#fff');
+    // Flat lay pastel
+    ctx.fillStyle='#F7F0E8'; ctx.fillRect(0,0,W,H);
+    // Texture
+    for(let i=0;i<3000;i++){const x=Math.random()*W,y=Math.random()*H;ctx.fillStyle=`rgba(180,150,120,0.03)`;ctx.fillRect(x,y,2,2);}
+    // Pastel circles
+    [[100,100,70,'rgba(255,182,193,0.5)'],[880,90,55,'rgba(255,218,185,0.6)'],[90,890,62,'rgba(176,224,230,0.5)'],[890,890,78,'rgba(255,160,122,0.45)'],[W/2,38,42,'rgba(221,160,221,0.45)']].forEach(([x,y,r,c])=>{ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();});
+    // Leaves
+    ctx.fillStyle='rgba(134,210,134,0.55)';
+    [[185,305],[820,325],[175,765],[830,730]].forEach(([x,y])=>{ctx.save();ctx.translate(x,y);ctx.rotate(Math.PI/4);ctx.beginPath();ctx.ellipse(0,0,20,10,0,0,Math.PI*2);ctx.fill();ctx.restore();});
+    // Dashed border
+    ctx.strokeStyle='rgba(180,120,80,0.28)'; ctx.lineWidth=2.5; ctx.setLineDash([10,10]);
+    ctx.strokeRect(30,30,W-60,H-60); ctx.setLineDash([]);
+    // Shadow
+    ctx.fillStyle='rgba(0,0,0,0.09)'; ctx.beginPath(); ctx.ellipse(W/2+16,H/2+20,235,30,0,0,Math.PI*2); ctx.fill();
+    // Product rotated
+    drawProductOnScene(ctx,img,PROD_CX,H/2,-0.065,0,true);
+    // Tag bottom-right
+    ctx.fillStyle='#C8845A'; RR(W-268,H-80,248,60,8); ctx.fill();
+    ctx.beginPath();ctx.moveTo(W-268,H-70);ctx.lineTo(W-292,H-50);ctx.lineTo(W-268,H-30);ctx.fill();
+    T('✦ PERSONALIZADO',W-144,H-44,'bold 18px Arial','#fff');
+    // Top label
+    ctx.fillStyle='rgba(200,132,90,0.92)'; RR(60,60,290,56,7); ctx.fill();
+    T('VISTA AÉREA',205,84,'bold 15px Arial','rgba(255,255,255,0.75)');
+    T('R$ 49,90',205,106,'bold 20px Arial','#fff');
 
   } else if(type==='promo'){
-    // BANNER PROMOCIONAL SHOPEE
+    // Shopee promo banner
     const bg=ctx.createLinearGradient(0,0,W,H);
-    bg.addColorStop(0,'#FF6B35');bg.addColorStop(.5,'#EE4D2D');bg.addColorStop(1,'#C62828');
-    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-    // Brilho diagonal
-    ctx.save();ctx.globalAlpha=.08;
-    const shine=ctx.createLinearGradient(0,0,W,H);
-    shine.addColorStop(0,'transparent');shine.addColorStop(.42,'#fff');shine.addColorStop(.58,'#fff');shine.addColorStop(1,'transparent');
-    ctx.fillStyle=shine;ctx.beginPath();ctx.moveTo(W*.15,0);ctx.lineTo(W*.65,0);ctx.lineTo(W*.45,H);ctx.lineTo(0,H);ctx.fill();
-    ctx.globalAlpha=1;ctx.restore();
-    // Círculos BG
-    ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=2;
-    [[200,200,160],[800,160,210],[140,820,190],[860,800,170],[500,500,320]].forEach(([x,y,r])=>{ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.stroke();});
-    // Header escuro
-    ctx.fillStyle='rgba(0,0,0,.22)';ctx.fillRect(0,0,W,200);
-    // Badge OFERTA
-    ctx.fillStyle='#FFD700';rr(36,28,170,64,7);ctx.fill();
-    txt('OFERTA',121,70,'bold 30px DM Sans,Arial','#C62828');
-    // Título
-    txt('PRODUTO',W/2,105,'bold 42px DM Sans,Arial','rgba(255,255,255,.6)');
-    txt('PERSONALIZADO',W/2,162,'bold 58px DM Sans,Arial','#fff');
-    // Card produto
-    ctx.fillStyle='rgba(255,255,255,.13)';rr(W/2-230,195,460,490,22);ctx.fill();
-    ctx.strokeStyle='rgba(255,255,255,.22)';ctx.lineWidth=2;rr(W/2-230,195,460,490,22);ctx.stroke();
-    // Produto
-    drawProduct(W/2,H*.47,370,0,false);
-    // Preço
-    ctx.fillStyle='rgba(0,0,0,.32)';ctx.fillRect(0,H-295,W,295);
-    txt('De R$ 79,90',W/2,H-238,'22px DM Sans,Arial','rgba(255,255,255,.5)');
-    ctx.strokeStyle='rgba(255,255,255,.5)';ctx.lineWidth=2;
+    bg.addColorStop(0,'#FF7028'); bg.addColorStop(0.5,'#EE4D2D'); bg.addColorStop(1,'#C62828');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    // Shine
+    ctx.save(); ctx.globalAlpha=0.08;
+    ctx.fillStyle='#fff'; ctx.beginPath(); ctx.moveTo(W*0.15,0); ctx.lineTo(W*0.6,0); ctx.lineTo(W*0.38,H); ctx.lineTo(0,H); ctx.fill();
+    ctx.globalAlpha=1; ctx.restore();
+    // Circles
+    ctx.strokeStyle='rgba(255,255,255,0.06)'; ctx.lineWidth=2;
+    [[200,200,160],[800,160,210],[150,800,180],[850,800,165],[W/2,W/2,320]].forEach(([x,y,r])=>{ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.stroke();});
+    // Header
+    ctx.fillStyle='rgba(0,0,0,0.22)'; ctx.fillRect(0,0,W,192);
+    ctx.fillStyle='#FFD700'; RR(32,26,172,64,7); ctx.fill();
+    T('OFERTA',118,68,'bold 30px Arial','#C62828');
+    T('PRODUTO',W/2,100,'bold 42px Arial','rgba(255,255,255,0.6)');
+    T('PERSONALIZADO',W/2,156,'bold 56px Arial','#fff');
+    // Product card
+    ctx.fillStyle='rgba(255,255,255,0.12)'; RR(W/2-225,196,450,485,20); ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.2)'; ctx.lineWidth=1.5; RR(W/2-225,196,450,485,20); ctx.stroke();
+    // Product
+    drawProductOnScene(ctx,img,PROD_CX,H*0.465,370,0,false);
+    // Price section
+    ctx.fillStyle='rgba(0,0,0,0.3)'; ctx.fillRect(0,H-285,W,285);
+    T('De R$ 79,90',W/2,H-235,'22px Arial','rgba(255,255,255,0.5)');
+    ctx.strokeStyle='rgba(255,255,255,0.45)'; ctx.lineWidth=1.5;
     const tw=ctx.measureText('De R$ 79,90').width;
-    ctx.beginPath();ctx.moveTo(W/2-tw/2,H-248);ctx.lineTo(W/2+tw/2,H-248);ctx.stroke();
-    txt('R$',W/2-100,H-146,'bold 38px DM Sans,Arial','#FFD700');
-    txt('49,90',W/2+80,H-130,'bold 96px DM Sans,Arial','#FFD700');
-    ctx.fillStyle='#4CAF50';rr(W/2+130,H-190,130,46,7);ctx.fill();
-    txt('38% OFF',W/2+195,H-160,'bold 22px DM Sans,Arial','#fff');
-    // Selos
-    [['✓ PERSONALIZADO',W/2-300],['✓ QUALIDADE',W/2],['✓ RÁPIDO',W/2+300]].forEach(([s,x])=>{
-      ctx.fillStyle='rgba(255,255,255,.16)';rr(x-110,H-90,220,60,9);ctx.fill();
-      ctx.strokeStyle='rgba(255,255,255,.32)';ctx.lineWidth=1;rr(x-110,H-90,220,60,9);ctx.stroke();
-      txt(s,x,H-54,'bold 18px DM Sans,Arial','#fff');
+    ctx.beginPath();ctx.moveTo(W/2-tw/2,H-244);ctx.lineTo(W/2+tw/2,H-244);ctx.stroke();
+    T('R$',W/2-100,H-148,'bold 36px Arial','#FFD700');
+    T('49,90',W/2+88,H-130,'bold 94px Arial','#FFD700');
+    ctx.fillStyle='#22c55e'; RR(W/2+130,H-190,132,46,7); ctx.fill();
+    T('38% OFF',W/2+196,H-160,'bold 22px Arial','#fff');
+    [['✓ ORIGINAL',W/2-300],['✓ QUALIDADE',W/2],['✓ RÁPIDO',W/2+300]].forEach(([s,x])=>{
+      ctx.fillStyle='rgba(255,255,255,0.15)'; RR(x-112,H-90,224,60,9); ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,0.3)'; ctx.lineWidth=1; RR(x-112,H-90,224,60,9); ctx.stroke();
+      T(s,x,H-54,'bold 18px Arial','#fff');
     });
-    ctx.fillStyle='rgba(0,0,0,.28)';ctx.fillRect(0,H-30,W,30);
-    txt('shopee.com.br  •  Produto Personalizado  •  Entrega para todo o Brasil',W/2,H-9,'12px DM Sans,Arial','rgba(255,255,255,.5)');
+    ctx.fillStyle='rgba(0,0,0,0.28)'; ctx.fillRect(0,H-28,W,28);
+    T('shopee.com.br · Produto Personalizado · Entrega Brasil',W/2,H-8,'11px Arial','rgba(255,255,255,0.45)');
 
   } else if(type==='gift'){
-    // CENÁRIO PRESENTE & GIFT
+    // Gift scenario
     const bg=ctx.createLinearGradient(0,0,0,H);
-    bg.addColorStop(0,'#FFF9FC');bg.addColorStop(1,'#FFE8F0');
-    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-    // Corações de fundo
-    ctx.fillStyle='rgba(255,105,135,.07)';
-    [[150,150],[850,100],[100,700],[900,750],[W/2,H/2+200],[300,500],[700,450]].forEach(([x,y])=>{
-      ctx.save();ctx.translate(x,y);ctx.scale(.5,.5);
+    bg.addColorStop(0,'#FFF5FA'); bg.addColorStop(1,'#FFE0EE');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    // Hearts
+    ctx.fillStyle='rgba(255,100,130,0.07)';
+    [[140,140],[860,100],[100,700],[900,740],[W/2,H/2+220],[300,480],[700,440]].forEach(([x,y])=>{
+      ctx.save();ctx.translate(x,y);ctx.scale(0.45,0.45);
       ctx.beginPath();ctx.moveTo(0,-20);ctx.bezierCurveTo(-50,-70,-100,-30,-100,20);ctx.bezierCurveTo(-100,60,-60,100,0,140);ctx.bezierCurveTo(60,100,100,60,100,20);ctx.bezierCurveTo(100,-30,50,-70,0,-20);
       ctx.fill();ctx.restore();
     });
-    // Confetes
-    const confColors=['#FF5722','#E91E63','#9C27B0','#FF9800','#4CAF50','#2196F3'];
-    for(let i=0;i<60;i++){
-      ctx.fillStyle=confColors[i%confColors.length];
-      ctx.save();ctx.translate(50+Math.random()*(W-100),50+Math.random()*(H*.4));
-      ctx.rotate(Math.random()*Math.PI);
-      ctx.fillRect(-6,-3,12,6);ctx.restore();
-    }
-    // Fita vertical e horizontal
-    ctx.fillStyle='rgba(255,87,34,.15)';ctx.fillRect(W/2-20,0,40,H);
-    ctx.fillRect(0,H/2-20,W,40);
-    // Laço no centro
-    ctx.fillStyle='#FF5722';
-    ctx.beginPath();ctx.ellipse(W/2-35,H/2-35,32,22,Math.PI*.6,0,Math.PI*2);ctx.fill();
-    ctx.beginPath();ctx.ellipse(W/2+35,H/2-35,32,22,-Math.PI*.6,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#E64A19';ctx.beginPath();ctx.arc(W/2,H/2,18,0,Math.PI*2);ctx.fill();
-    // Produto
-    drawProduct(W/2,H*.44,520);
-    // Banner topo
-    ctx.fillStyle='rgba(255,87,34,.9)';rr(0,0,W,78,0);ctx.fill();
-    txt('🎁 PRESENTE PERFEITO PARA',W/2,30,'16px DM Sans,Arial','rgba(255,255,255,.8)');
-    txt('QUEM VOCÊ AMA',W/2,62,'bold 32px DM Sans,Arial','#fff');
-    // Tag fundo
-    ctx.fillStyle='rgba(0,0,0,.75)';rr(0,H-110,W,110,0);ctx.fill();
-    txt('Personalizado com carinho · Embalagem especial incluída',W/2,H-72,'15px DM Sans,Arial','rgba(255,255,255,.7)');
-    txt('SURPREENDA COM UM PRESENTE ÚNICO',W/2,H-36,'bold 20px DM Sans,Arial','#FF8A50');
-    ctx.fillStyle='#FFD700';rr(W-180,H-98,160,40,7);ctx.fill();
-    txt('R$ 49,90',W-100,H-71,'bold 22px DM Sans,Arial','#C62828');
+    // Confetti
+    const cc=['#FF6B00','#E91E63','#9C27B0','#FF9800','#22c55e','#2196F3'];
+    for(let i=0;i<55;i++){ctx.fillStyle=cc[i%cc.length];ctx.save();ctx.translate(50+Math.random()*(W-100),40+Math.random()*(H*0.38));ctx.rotate(Math.random()*Math.PI);ctx.fillRect(-5,-2.5,10,5);ctx.restore();}
+    // Ribbon lines
+    ctx.fillStyle='rgba(255,107,0,0.12)'; ctx.fillRect(W/2-18,0,36,H); ctx.fillRect(0,H/2-18,W,36);
+    // Bow
+    ctx.fillStyle='#FF6B00';
+    ctx.beginPath();ctx.ellipse(W/2-32,H/2-32,30,20,Math.PI*0.6,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.ellipse(W/2+32,H/2-32,30,20,-Math.PI*0.6,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#E64A00'; ctx.beginPath();ctx.arc(W/2,H/2,16,0,Math.PI*2);ctx.fill();
+    // Product
+    drawProductOnScene(ctx,img,PROD_CX,PROD_CY,PROD_SIZE,0,true);
+    // Top banner
+    ctx.fillStyle='rgba(255,107,0,0.92)'; ctx.fillRect(0,0,W,76);
+    T('🎁 PRESENTE PERFEITO PARA QUEM VOCÊ AMA',W/2,28,'16px Arial','rgba(255,255,255,0.85)');
+    T('SURPREENDA COM UM PRESENTE ÚNICO',W/2,60,'bold 26px Arial','#fff');
+    // Bottom
+    ctx.fillStyle='rgba(0,0,0,0.72)'; ctx.fillRect(0,H-104,W,104);
+    T('Personalizado com carinho · Embalagem especial incluída',W/2,H-68,'14px Arial','rgba(255,255,255,0.7)');
+    T('SURPREENDA AGORA · R$ 49,90',W/2,H-32,'bold 22px Arial','#FF9A3C');
   }
 }
 

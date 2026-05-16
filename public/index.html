@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ArznStoreSP Personalizados — Gerador Shopee 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0e;--s1:#111118;--s2:#18181f;--s3:#1e1e28;
+  --bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.13);
+  --or:#FF5722;--o2:#FF8A50;--o3:rgba(255,87,34,.12);--o4:rgba(255,87,34,.06);
+  --tx:#ede8e3;--t2:#999;--mu:#555;
+  --gr:#4CAF50;--g2:rgba(76,175,80,.12);
+  --rd:#EE4D2D;
+}
+html{font-size:15px}
+body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;line-height:1.5}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:linear-gradient(rgba(255,87,34,.022)1px,transparent 1px),
+             linear-gradient(90deg,rgba(255,87,34,.022)1px,transparent 1px);
+  background-size:56px 56px}
+body::after{content:'';position:fixed;top:-30%;left:50%;transform:translateX(-50%);
+  width:900px;height:600px;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse,rgba(255,87,34,.05)0%,transparent 68%)}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:200;background:rgba(10,10,14,.96);
+  backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);
+  padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:42px;height:42px;border-radius:13px;
+  background:linear-gradient(135deg,#FF5722,#BF360C);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 4px 18px rgba(255,87,34,.4)}
+.logo-name{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.5px}
+.logo-name span{color:var(--or)}
+.logo-sub{font-size:11px;color:var(--mu);margin-top:1px}
+.hbadge{background:var(--o3);border:1px solid rgba(255,87,34,.28);
+  color:var(--o2);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600}
+
+/* NAV */
+.main-nav{display:flex;gap:4px;margin-left:auto;margin-right:24px}
+.mnav{background:transparent;border:none;color:var(--t2);font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:600;padding:8px 16px;border-radius:10px;cursor:pointer;
+  transition:all .18s;border-bottom:2px solid transparent}
+.mnav:hover{color:var(--tx);background:rgba(255,255,255,.04)}
+.mnav.on{color:var(--or);background:var(--o3);border-bottom-color:var(--or)}
+
+main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:32px 24px 80px}
+
+/* SECTION LABEL */
+.slbl{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--mu);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.slbl::before{content:'';width:18px;height:1px;background:var(--mu)}
+
+/* KEYS BOX */
+.keysbox{border:1px solid rgba(255,87,34,.22);border-radius:18px;
+  padding:22px 26px;margin-bottom:28px;
+  background:linear-gradient(135deg,rgba(255,87,34,.07),rgba(255,87,34,.02))}
+.keys-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:5px}
+.keys-desc{font-size:13px;color:var(--t2);margin-bottom:18px;line-height:1.7}
+.keys-desc a{color:var(--o2);text-decoration:none;border-bottom:1px solid rgba(255,138,80,.3)}
+.keys-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.keys-grid{grid-template-columns:1fr}}
+.key-block{background:rgba(0,0,0,.3);border:1px solid var(--bd2);border-radius:13px;padding:16px 18px}
+.key-block-title{font-size:12px;font-weight:600;color:var(--o2);margin-bottom:3px;display:flex;align-items:center;gap:6px}
+.key-block-desc{font-size:11.5px;color:var(--mu);margin-bottom:10px;line-height:1.6}
+.key-row{display:flex;gap:8px}
+.ki{flex:1;background:rgba(0,0,0,.5);border:1px solid var(--bd2);border-radius:9px;
+  padding:9px 13px;color:var(--tx);font-size:12.5px;font-family:'DM Sans',sans-serif;
+  outline:none;transition:border-color .2s}
+.ki:focus{border-color:var(--or)}
+.ki::placeholder{color:#333}
+.ks{background:var(--or);color:#fff;border:none;border-radius:9px;
+  padding:9px 16px;font-size:12px;font-family:'Syne',sans-serif;
+  font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.ks:hover{background:#e64a19}
+.key-ok{display:none;align-items:center;gap:6px;font-size:11.5px;
+  color:var(--gr);margin-top:8px;background:var(--g2);
+  border:1px solid rgba(76,175,80,.25);border-radius:8px;padding:6px 10px}
+
+/* PANELS */
+.panel{background:var(--s1);border:1px solid var(--bd);border-radius:18px;overflow:hidden;margin-bottom:20px}
+.panel-hd{padding:16px 22px;border-bottom:1px solid var(--bd);
+  display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:15px}
+.panel-hd-sub{font-size:11px;color:var(--mu);font-family:'DM Sans',sans-serif;font-weight:400;margin-left:4px}
+.panel-bd{padding:22px}
+.panel-ft{padding:14px 22px;background:var(--s2);border-top:1px solid var(--bd);
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* UPLOAD */
+.upload-zone{border:2px dashed rgba(255,255,255,.1);border-radius:16px;
+  padding:50px 28px;text-align:center;cursor:pointer;transition:all .25s;
+  background:rgba(255,255,255,.013);position:relative;overflow:hidden}
+.upload-zone::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50%50%,rgba(255,87,34,.05),transparent 65%);
+  opacity:0;transition:opacity .3s}
+.upload-zone:hover::after,.upload-zone.ov::after{opacity:1}
+.upload-zone:hover,.upload-zone.ov{border-color:var(--or);background:rgba(255,87,34,.025)}
+.upload-zone input{display:none}
+.uz-icon{width:72px;height:72px;border-radius:20px;background:var(--o3);
+  border:1px solid rgba(255,87,34,.22);display:flex;align-items:center;justify-content:center;
+  font-size:32px;margin:0 auto 16px;transition:transform .22s}
+.upload-zone:hover .uz-icon{transform:scale(1.06) rotate(-3deg)}
+.uz-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:6px}
+.uz-sub{font-size:13px;color:var(--mu)}
+.img-preview-wrap{border-radius:14px;overflow:hidden;border:1px solid var(--bd);background:#0d0d13;
+  position:relative;min-height:180px;display:flex;align-items:center;justify-content:center}
+.img-preview{width:100%;display:block;max-height:300px;object-fit:contain}
+.img-tags{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.img-tag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;padding:4px 12px;font-size:11px;color:var(--mu)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+@media(max-width:680px){.g2,.g3{grid-template-columns:1fr}}
+
+/* FORM */
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:0}
+.fg label{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.7px}
+.inp{background:var(--s2);border:1.5px solid var(--bd);border-radius:10px;color:var(--tx);
+  font-size:14px;padding:11px 14px;width:100%;outline:none;transition:all .18s;
+  font-family:'DM Sans',sans-serif}
+.inp:focus{border-color:var(--or);background:var(--s3)}
+.inp::placeholder{color:#333}
+.ta{background:var(--s2);border:1.5px solid var(--bd);border-radius:10px;color:var(--tx);
+  font-size:14px;padding:11px 14px;width:100%;outline:none;resize:vertical;line-height:1.6;
+  min-height:80px;transition:all .18s;font-family:'DM Sans',sans-serif}
+.ta:focus{border-color:var(--or);background:var(--s3)}
+.sel{background:var(--s2);border:1.5px solid var(--bd);border-radius:10px;color:var(--tx);
+  font-size:14px;padding:11px 14px;width:100%;outline:none;cursor:pointer;
+  transition:border-color .18s;font-family:'DM Sans',sans-serif}
+.sel:focus{border-color:var(--or)}
+.sel option{background:var(--s2)}
+
+/* BUTTONS */
+.btn-main{background:linear-gradient(135deg,#FF5722,#BF360C);color:#fff;border:none;
+  border-radius:13px;padding:15px 32px;font-size:16px;font-family:'Syne',sans-serif;
+  font-weight:700;cursor:pointer;box-shadow:0 6px 28px rgba(255,87,34,.38);
+  transition:all .25s;display:inline-flex;align-items:center;gap:10px}
+.btn-main:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,87,34,.5)}
+.btn-main:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-sec{background:rgba(255,255,255,.05);color:var(--t2);border:1.5px solid var(--bd);
+  border-radius:10px;padding:10px 18px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;
+  font-weight:500;transition:all .18s}
+.btn-sec:hover{color:var(--tx);border-color:var(--bd2);background:rgba(255,255,255,.08)}
+.btn-grn{background:rgba(76,175,80,.15);color:var(--gr);border:1.5px solid rgba(76,175,80,.35);
+  border-radius:10px;padding:10px 18px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;
+  font-weight:600;transition:all .18s;display:inline-flex;align-items:center;gap:7px}
+.btn-grn:hover{background:rgba(76,175,80,.25);border-color:var(--gr)}
+.btn-shopee{background:var(--rd);color:#fff;border:none;border-radius:10px;
+  padding:10px 20px;font-size:13px;font-family:'Syne',sans-serif;font-weight:700;
+  cursor:pointer;transition:all .18s;box-shadow:0 4px 14px rgba(238,77,45,.3)}
+.btn-shopee:hover{background:#ff6040;box-shadow:0 6px 20px rgba(238,77,45,.45)}
+.btn-excel{background:linear-gradient(135deg,#1a6b2e,#2d9e47);color:#fff;border:none;
+  border-radius:10px;padding:10px 18px;font-size:13px;font-family:'DM Sans',sans-serif;
+  font-weight:700;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:7px;
+  box-shadow:0 4px 14px rgba(45,158,71,.25)}
+.btn-excel:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(45,158,71,.4)}
+.btn-cp{background:none;border:1.5px solid var(--bd);color:var(--t2);border-radius:7px;
+  padding:5px 13px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;
+  font-weight:600;transition:all .18s;white-space:nowrap}
+.btn-cp:hover{border-color:var(--or);color:var(--or)}
+.btn-cp.ok{border-color:var(--gr);color:var(--gr)}
+
+/* RESULT TABS */
+.stabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.stab{background:rgba(255,255,255,.04);border:1px solid var(--bd);color:var(--mu);
+  border-radius:11px;padding:8px 16px;font-size:12px;font-family:'DM Sans',sans-serif;
+  cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:6px;font-weight:500}
+.stab:hover{border-color:rgba(255,87,34,.35);color:var(--o2)}
+.stab.on{background:var(--o3);border-color:rgba(255,87,34,.5);color:var(--o2)}
+
+/* RESULT CARDS */
+.rc{background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:18px;margin-bottom:14px}
+.rl{font-size:10px;font-weight:700;color:var(--or);text-transform:uppercase;letter-spacing:1.2px;
+  margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.rv{font-size:14px;color:var(--tx);line-height:1.7;white-space:pre-wrap}
+.rn{font-size:11px;color:var(--mu);margin-top:5px;font-family:monospace}
+
+/* TAGS */
+.tag-wrap{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.tag{background:var(--o3);color:var(--o2);border:1px solid rgba(255,87,34,.25);
+  border-radius:20px;padding:4px 12px;font-size:12px;cursor:pointer;
+  transition:all .18s;font-weight:500}
+.tag:hover{background:rgba(255,87,34,.22)}
+
+/* PRICE BOXES */
+.pboxes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+.pbox{background:var(--s2);border:1.5px solid var(--bd);border-radius:12px;padding:16px;text-align:center}
+.pbox.hl{border-color:var(--or);background:rgba(255,87,34,.05)}
+.plbl{font-size:11px;color:var(--t2);margin-bottom:6px;font-weight:500}
+.pval{font-size:24px;font-weight:700;font-family:monospace}
+.pval.hl{color:var(--or)}
+
+/* FISCAL TABLE */
+.ftable{width:100%;border-collapse:collapse;font-size:13px}
+.ftable td{padding:10px 13px;border-bottom:1px solid var(--bd)}
+.ftable tr:last-child td{border-bottom:none}
+.ftable td:first-child{color:var(--t2);width:42%;font-weight:500}
+.ftable td:last-child{font-weight:600;font-family:monospace;font-size:12px}
+
+/* SEO SCORE BANNER */
+.seo-banner{background:var(--g2);border:1px solid rgba(76,175,80,.25);border-radius:14px;
+  padding:16px 20px;display:flex;align-items:center;gap:18px;margin-bottom:20px}
+.score-ring{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;position:relative}
+.score-inner{width:46px;height:46px;border-radius:50%;background:var(--s1);
+  display:flex;align-items:center;justify-content:center;position:absolute}
+.score-num{font-size:15px;font-weight:700;color:var(--gr);position:relative;z-index:1}
+.score-bar{background:var(--s2);border-radius:4px;height:5px;overflow:hidden;
+  margin-top:5px;width:200px;max-width:100%}
+.score-fill{height:100%;border-radius:4px;background:var(--gr);transition:width .6s}
+
+/* LOADING */
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes si{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:-200%0}100%{background-position:200%0}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.spinner{width:36px;height:36px;border:3px solid rgba(255,87,34,.15);
+  border-top-color:var(--or);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px}
+.steps{display:flex;flex-direction:column;gap:5px;margin-top:14px;max-width:300px;margin-left:auto;margin-right:auto}
+.step{font-size:13px;color:var(--mu);transition:color .3s;padding:3px 0}
+.step.active{color:var(--or);font-weight:500}.step.done{color:var(--gr)}
+.slide{animation:si .38s ease}
+
+/* PROGRESS BAR */
+.prog-wrap{max-width:420px;margin:14px auto 0}
+.prog-bar{height:4px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;width:0%;background:linear-gradient(90deg,#FF5722,#FF8A50,#FF5722);
+  background-size:200%100%;border-radius:4px;transition:width .5s;animation:shimmer 1.8s infinite}
+.prog-txt{font-size:12px;color:var(--mu);margin-top:7px;text-align:center}
+
+/* PHOTO ANGLES */
+.angle-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.atab{background:rgba(255,255,255,.04);border:1px solid var(--bd);color:var(--mu);
+  border-radius:11px;padding:8px 15px;font-size:12px;cursor:pointer;transition:all .18s;
+  display:flex;align-items:center;gap:7px;font-weight:500}
+.atab:hover{border-color:rgba(255,87,34,.35);color:var(--o2)}
+.atab.on{background:var(--o3);border-color:rgba(255,87,34,.5);color:var(--o2)}
+.angle-card{background:var(--s1);border:1px solid var(--bd);border-radius:18px;overflow:hidden;animation:si .38s ease}
+.angle-img-wrap{background:#0d0d13;border-bottom:1px solid var(--bd);position:relative;
+  min-height:180px;display:flex;align-items:center;justify-content:center}
+.angle-img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+.angle-img-badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.75);
+  backdrop-filter:blur(8px);border-radius:8px;padding:4px 10px;
+  font-size:11px;color:#aaa;border:1px solid rgba(255,255,255,.07)}
+.angle-dl{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.8);
+  backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:9px;
+  padding:7px 14px;font-size:12px;color:var(--tx);cursor:pointer;
+  text-decoration:none;display:flex;align-items:center;gap:6px;transition:all .2s}
+.angle-dl:hover{background:var(--or);border-color:var(--or)}
+.angle-info{padding:20px 22px}
+.angle-head{padding:14px 20px;border-bottom:1px solid var(--bd);
+  display:flex;align-items:center;gap:10px}
+.angle-body{padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:540px){.angle-body{grid-template-columns:1fr}}
+.ib{background:var(--s2);border-radius:11px;padding:13px 15px;border:1px solid rgba(255,255,255,.045)}
+.ib.or{background:rgba(255,87,34,.05);border-color:rgba(255,87,34,.15)}
+.ib.full{grid-column:1/-1}
+.ib.ac{border-left:3px solid var(--or)}
+.il{font-size:10px;letter-spacing:.9px;text-transform:uppercase;color:var(--mu);margin-bottom:7px;font-weight:600}
+.il.or{color:var(--or)}
+.it{font-size:13px;color:#ccc;line-height:1.7}
+
+/* SAVED PRODUCTS */
+.product-row{background:var(--s2);border:1px solid var(--bd);border-radius:11px;
+  padding:13px 17px;margin-bottom:9px;display:flex;align-items:center;gap:14px;transition:border-color .18s}
+.product-row:hover{border-color:var(--bd2)}
+.product-row-num{width:26px;height:26px;border-radius:50%;background:var(--o3);
+  color:var(--or);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.product-row-info{flex:1;min-width:0}
+.product-row-name{font-size:14px;font-weight:600;margin-bottom:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.product-row-meta{font-size:11px;color:var(--t2)}
+.product-row-price{font-size:16px;font-weight:700;color:var(--or);font-family:monospace;white-space:nowrap}
+.product-row-del{background:none;border:1px solid rgba(244,67,54,.3);color:rgba(244,67,54,.7);
+  border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;transition:all .18s;font-family:inherit}
+.product-row-del:hover{background:rgba(244,67,54,.1);color:#f44336;border-color:#f44336}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;
+  display:none;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--s1);border:1px solid var(--bd2);border-radius:18px;
+  width:92%;max-width:920px;max-height:88vh;display:flex;flex-direction:column;
+  overflow:hidden;box-shadow:0 28px 72px rgba(0,0,0,.7)}
+.modal-hd{padding:20px 26px;border-bottom:1px solid var(--bd);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.modal-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700}
+.modal-close{background:var(--s2);border:1px solid var(--bd);color:var(--t2);
+  border-radius:8px;width:34px;height:34px;cursor:pointer;font-size:17px;
+  display:flex;align-items:center;justify-content:center;transition:all .18s}
+.modal-close:hover{color:var(--tx)}
+.modal-body{overflow-y:auto;padding:20px 26px;flex:1}
+.modal-ft{padding:16px 26px;border-top:1px solid var(--bd);
+  display:flex;gap:10px;align-items:center;flex-shrink:0;background:var(--s2)}
+
+/* INFO BLOCKS */
+.info-blk{background:rgba(33,150,243,.07);border:1px solid rgba(33,150,243,.2);
+  border-radius:10px;padding:11px 15px;font-size:13px;color:#90CAF9;line-height:1.6;margin-bottom:14px}
+.warn-blk{background:rgba(255,152,0,.07);border:1px solid rgba(255,152,0,.2);
+  border-radius:10px;padding:11px 15px;font-size:13px;color:#FFCC80;line-height:1.6;margin-bottom:14px}
+.ok-blk{background:var(--g2);border:1px solid rgba(76,175,80,.25);
+  border-radius:10px;padding:11px 15px;font-size:13px;color:#A5D6A7;line-height:1.6;margin-bottom:14px}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(18px);
+  background:#1c1c26;border:1px solid var(--bd2);border-radius:12px;
+  padding:11px 22px;font-size:13px;color:var(--tx);
+  box-shadow:0 6px 28px rgba(0,0,0,.5);z-index:999;
+  opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;max-width:92vw}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.err{border-color:rgba(255,80,80,.3);color:#ff8585;background:#1e1218}
+#toast.ok{border-color:rgba(76,175,80,.3);color:var(--gr);background:#121c14}
+#toast.info{border-color:rgba(33,150,243,.3);color:#64B5F6;background:#121620}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:60px 20px}
+.empty-icon{font-size:56px;margin-bottom:14px;opacity:.15;animation:pulse 3s ease-in-out infinite}
+.empty-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px;color:#222}
+.empty-sub{font-size:13px;color:#333;max-width:320px;margin:0 auto;line-height:1.8}
+
+/* EXPORT BAR */
+.export-bar{background:var(--s1);border:1px solid var(--bd);border-radius:14px;
+  padding:14px 18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.export-lbl{font-size:10px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-right:4px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🛍</div>
+    <div>
+      <div class="logo-name">ArznStoreSP <span>Personalizados</span></div>
+      <div class="logo-sub">Gerador Completo Shopee 2026</div>
+    </div>
+  </div>
+  <div class="main-nav">
+    <button class="mnav on" onclick="showView('gen',this)">✦ Gerar Anúncio</button>
+    <button class="mnav" onclick="showView('photos',this)">📸 Fotos IA</button>
+    <button class="mnav" onclick="showView('trends',this)">📈 Tendências</button>
+    <button class="mnav" onclick="showView('seo',this)">🔍 SEO</button>
+    <button class="mnav" onclick="showView('saved',this)">📦 Salvos <span id="nav-count" style="display:none;background:var(--or);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;margin-left:3px">0</span></button>
+  </div>
+  <div class="hbadge">✦ 2026</div>
+</header>
+
+<main>
+
+<!-- ============================================================ -->
+<!-- VIEW: GENERATOR -->
+<!-- ============================================================ -->
+<div id="view-gen">
+
+  <!-- STATUS BAR -->
+  <div style="background:rgba(76,175,80,.08);border:1px solid rgba(76,175,80,.2);border-radius:14px;padding:14px 22px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#4CAF50;animation:pulse 2s infinite"></div><span style="font-size:13px;font-weight:600;color:#4CAF50">Claude Conectado</span></div>
+    <div id="dalle-status" style="display:flex;align-items:center;gap:8px"><div style="width:8px;height:8px;border-radius:50%;background:#555"></div><span style="font-size:13px;color:#555">DALL-E — configure chave OpenAI no server.js para ativar fotos</span></div>
+    <div style="margin-left:auto;font-size:12px;color:var(--mu)">Chaves configuradas no <b>server.js</b></div>
+  </div>
+
+  <!-- UPLOAD -->
+  <div class="panel">
+    <div class="panel-hd">📸 Foto do Produto <span class="panel-hd-sub">A IA analisa e usa para gerar o anúncio</span></div>
+    <div class="panel-bd">
+      <div id="uz-main" class="upload-zone" ondragover="dov(event,this)" ondragleave="dlv(this)" ondrop="ddr(event,this)" onclick="document.getElementById('fi-main').click()">
+        <input type="file" id="fi-main" accept="image/*" onchange="loadImg(this.files[0])"/>
+        <div class="uz-icon">📸</div>
+        <div class="uz-title">Arraste ou clique para enviar</div>
+        <div class="uz-sub">JPG · PNG · WEBP · redimensionado automaticamente</div>
+        <div class="img-tags" style="margin-top:14px">
+          <span class="img-tag">Frente principal</span>
+          <span class="img-tag">45°</span>
+          <span class="img-tag">Lateral</span>
+          <span class="img-tag">Close-up</span>
+          <span class="img-tag">Vista superior</span>
+        </div>
+      </div>
+      <div id="img-preview-area" style="display:none;margin-top:16px">
+        <div class="g2" style="gap:14px">
+          <div class="img-preview-wrap">
+            <img id="img-preview" class="img-preview" src="" alt="produto"/>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;justify-content:center">
+            <div class="ok-blk">✓ Foto carregada e otimizada! Preencha os dados abaixo e clique em Gerar.</div>
+            <button class="btn-sec" onclick="document.getElementById('fi-main').click()" style="width:100%">🔄 Trocar foto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT INFO -->
+  <div class="panel">
+    <div class="panel-hd">⚙ Informações do Produto <span class="panel-hd-sub">Quanto mais detalhes, melhor o resultado</span></div>
+    <div class="panel-bd">
+      <div class="g2" style="margin-bottom:16px">
+        <div class="fg"><label>Tipo de Produto *</label><input id="f_pt" class="inp" placeholder="Ex: Caneca personalizada, Almofada..."></div>
+        <div class="fg"><label>Categoria Shopee</label>
+          <select id="f_cat" class="sel">
+            <option value="">Selecionar...</option>
+            <option>Casa e Decoração > Decoração > Outros</option>
+            <option>Casa e Decoração > Utilidades Domésticas</option>
+            <option>Roupas e Acessórios > Camisetas</option>
+            <option>Papelaria > Outros</option>
+            <option>Presentes e Festas > Presentes</option>
+            <option>Pet Shop > Acessórios</option>
+            <option>Acessórios Pessoais</option>
+          </select>
+        </div>
+        <div class="fg"><label>Material / Técnica</label><input id="f_mat" class="inp" placeholder="Ex: Sublimação, MDF, Acrílico..."></div>
+        <div class="fg"><label>Ocasião / Público</label><input id="f_occ" class="inp" placeholder="Ex: Dia das Mães, Empresas..."></div>
+        <div class="fg"><label>Preço de Custo (R$)</label><input id="f_cp" class="inp" type="number" placeholder="Ex: 15.00" step="0.01"></div>
+        <div class="fg"><label>Marca</label><input id="f_brand" class="inp" placeholder="Ex: ArznStoreSP Personalizados"></div>
+        <div class="fg"><label>Peso Aprox. (kg)</label><input id="f_weight" class="inp" type="number" placeholder="Ex: 0.3" step="0.01"></div>
+        <div class="fg"><label>Diferenciais</label><input id="f_dif" class="inp" placeholder="Ex: frete grátis, caixa presente..."></div>
+      </div>
+      <div class="fg"><label>Informações Adicionais</label><textarea id="f_ai" class="ta" placeholder="Dimensões, variações disponíveis, qualquer detalhe extra..."></textarea></div>
+    </div>
+    <div class="panel-ft">
+      <button class="btn-main" id="genBtn" onclick="generate()">✦ Gerar Anúncio Completo com IA</button>
+      <button class="btn-sec" onclick="resetForm()">Limpar</button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="panel" id="loadPanel" style="display:none;padding:40px 24px;text-align:center">
+    <div class="spinner"></div>
+    <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:6px">IA gerando seu anúncio completo...</div>
+    <div style="font-size:13px;color:var(--t2);margin-bottom:18px">Preenchendo todas as 7 abas da Shopee automaticamente</div>
+    <div class="steps" id="stepList"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="resultSection" style="display:none" class="slide">
+    <div class="seo-banner" id="seoBanner"></div>
+    <div class="stabs" id="stabs">
+      <button class="stab on" onclick="switchTab('info',this)">📋 Info Básica</button>
+      <button class="stab" onclick="switchTab('spec',this)">🔧 Especificação</button>
+      <button class="stab" onclick="switchTab('desc',this)">📝 Descrição</button>
+      <button class="stab" onclick="switchTab('sales',this)">💰 Vendas</button>
+      <button class="stab" onclick="switchTab('fiscal',this)">🧾 Fiscal</button>
+      <button class="stab" onclick="switchTab('ship',this)">📦 Envio</button>
+      <button class="stab" onclick="switchTab('other',this)">⚙ Outros</button>
+    </div>
+    <div id="tabContent"></div>
+    <div class="export-bar">
+      <span class="export-lbl">Exportar:</span>
+      <button class="btn-grn" onclick="saveProduct()">💾 Salvar Produto</button>
+      <button class="btn-sec" onclick="copyAll()">📄 Copiar Tudo</button>
+      <button class="btn-sec" onclick="downloadTxt()">⬇ .TXT</button>
+      <button class="btn-shopee" onclick="copyShopee()">🛒 Formato Shopee</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- VIEW: PHOTOS (DALL-E) -->
+<!-- ============================================================ -->
+<div id="view-photos" style="display:none">
+  <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px">📸 Gerador de Fotos com IA</div>
+  <div style="font-size:14px;color:var(--t2);margin-bottom:24px">Envie uma foto e a IA gera 5 ângulos profissionais prontos para Shopee usando DALL-E 3</div>
+
+  <div class="panel">
+    <div class="panel-hd">📤 Envie a foto do produto</div>
+    <div class="panel-bd">
+      <div id="ph-upload-area">
+        <div id="ph-dz" class="upload-zone" ondragover="dov(event,this)" ondragleave="dlv(this)" ondrop="phDrop(event,this)" onclick="document.getElementById('ph-fi').click()">
+          <input type="file" id="ph-fi" accept="image/*" onchange="phLoad(this.files[0])"/>
+          <div class="uz-icon">📸</div>
+          <div class="uz-title">Arraste ou clique para selecionar</div>
+          <div class="uz-sub">JPG · PNG · WEBP · até 10MB</div>
+        </div>
+      </div>
+      <div id="ph-preview-area" style="display:none">
+        <div class="g2" style="gap:14px">
+          <div class="img-preview-wrap"><img id="ph-preview" class="img-preview" src="" alt=""/></div>
+          <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
+            <div class="ok-blk">✓ Foto pronta! Clique em Gerar para criar os 5 ângulos.</div>
+            <button class="btn-sec" onclick="document.getElementById('ph-fi').click()">🔄 Trocar foto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-ft">
+      <button class="btn-main" id="ph-gen-btn" onclick="phGen()" disabled>✦ Gerar 5 Ângulos + Fotos</button>
+      <div id="ph-prog" style="display:none;flex:1">
+        <div class="prog-bar"><div class="prog-fill" id="ph-pf"></div></div>
+        <div class="prog-txt" id="ph-pt">Iniciando...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANGLE RESULTS -->
+  <div id="ph-results" style="display:none">
+    <div class="slbl">Fotos Geradas <span id="ph-dc" style="color:var(--o2);font-family:'Syne',sans-serif;font-size:13px">(0/5)</span></div>
+    <div class="angle-tabs" id="ph-tabs"></div>
+    <div id="ph-card"></div>
+    <div class="info-blk" style="margin-top:16px">📐 <b>Requisitos Shopee:</b> 1:1 · mínimo 500×500px · máximo 9MB · fundo branco recomendado para capa</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- VIEW: TRENDS -->
+<!-- ============================================================ -->
+<div id="view-trends" style="display:none">
+  <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px">📈 Tendências de Produtos Personalizados</div>
+  <div style="font-size:14px;color:var(--t2);margin-bottom:24px">Descubra o que está em alta na Shopee Brasil — 2026</div>
+
+  <div class="panel" style="margin-bottom:22px">
+    <div class="panel-hd">🔎 Buscar Tendências por Produto <span class="panel-hd-sub">Ex: caneca, camiseta, almofada...</span></div>
+    <div class="panel-bd">
+      <div style="display:flex;gap:12px;margin-bottom:14px">
+        <input id="trendQ" class="inp" style="flex:1" placeholder="Ex: caneca personalizada, camiseta personalizada..." onkeydown="if(event.key==='Enter')searchTrends()">
+        <button class="btn-main" id="trendBtn" onclick="searchTrends()" style="padding:11px 24px;font-size:14px">🔍 Buscar</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="font-size:12px;color:var(--t2);align-self:center">Busca rápida:</span>
+        <button class="btn-sec" style="font-size:12px;padding:6px 13px" onclick="quickTrend('caneca personalizada')">☕ Caneca</button>
+        <button class="btn-sec" style="font-size:12px;padding:6px 13px" onclick="quickTrend('camiseta personalizada')">👕 Camiseta</button>
+        <button class="btn-sec" style="font-size:12px;padding:6px 13px" onclick="quickTrend('almofada personalizada')">🛋 Almofada</button>
+        <button class="btn-sec" style="font-size:12px;padding:6px 13px" onclick="quickTrend('quadro decorativo')">🖼 Quadro</button>
+        <button class="btn-sec" style="font-size:12px;padding:6px 13px" onclick="quickTrend('case celular personalizado')">📱 Case</button>
+        <button class="btn-sec" style="font-size:12px;padding:6px 13px" onclick="quickTrend('copo personalizado')">🥤 Copo</button>
+        <button class="btn-sec" style="font-size:12px;padding:6px 13px" onclick="quickTrend('necessaire personalizada')">💼 Nécessaire</button>
+        <button class="btn-sec" style="font-size:12px;padding:6px 13px" onclick="quickTrend('placa decorativa personalizada')">🪧 Placa</button>
+      </div>
+    </div>
+  </div>
+  <div id="trendSearchResults"></div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700">🔥 Tendências Gerais</div>
+    <button class="btn-main" id="trendsGenBtn" onclick="loadTrends()" style="padding:10px 18px;font-size:13px">🔄 Atualizar com IA</button>
+  </div>
+  <div id="trendsContent"><div style="text-align:center;padding:50px;color:var(--t2);background:var(--s1);border-radius:14px;border:1px solid var(--bd)">Clique em "Atualizar com IA" para buscar tendências gerais.</div></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- VIEW: SEO -->
+<!-- ============================================================ -->
+<div id="view-seo" style="display:none">
+  <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px">🔍 Pesquisa de Palavras-chave</div>
+  <div style="font-size:14px;color:var(--t2);margin-bottom:24px">Encontre os melhores termos para rankear na Shopee 2026</div>
+  <div class="panel" style="margin-bottom:20px">
+    <div class="panel-bd" style="display:flex;gap:12px">
+      <input id="seoQ" class="inp" style="flex:1;font-size:15px" placeholder="Ex: caneca personalizada" onkeydown="if(event.key==='Enter')searchSEO()">
+      <button class="btn-main" id="seoBtn" onclick="searchSEO()" style="padding:11px 24px;font-size:14px">🔍 Pesquisar</button>
+    </div>
+  </div>
+  <div id="seoResults"></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- VIEW: SAVED -->
+<!-- ============================================================ -->
+<div id="view-saved" style="display:none">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+    <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800">📦 Produtos Salvos</div>
+    <div style="display:flex;gap:10px">
+      <button class="btn-excel" onclick="exportExcel()">📊 Exportar Excel — Upload Shopee</button>
+      <button class="btn-sec" style="color:#f44336;border-color:rgba(244,67,54,.3)" onclick="clearSaved()">🗑 Limpar Tudo</button>
+    </div>
+  </div>
+  <div style="font-size:14px;color:var(--t2);margin-bottom:22px">Gere anúncios, salve e exporte um arquivo Excel para upload em massa na Shopee</div>
+  <div id="savedList"></div>
+</div>
+
+</main>
+
+<!-- EXCEL MODAL -->
+<div class="modal-overlay" id="excelModal">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">📊 Preview — Excel para Upload Shopee</div>
+      <button class="modal-close" onclick="document.getElementById('excelModal').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body" id="excelPreview"></div>
+    <div class="modal-ft">
+      <button class="btn-excel" onclick="downloadExcel()">⬇ Baixar .CSV — Pronto para Shopee</button>
+      <button class="btn-sec" onclick="document.getElementById('excelModal').classList.remove('open')">Fechar</button>
+      <span style="margin-left:auto;font-size:13px;color:var(--t2)" id="excelInfo"></span>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ================================================================
+// STATE
+// ================================================================
+let imgB64=null,imgMime=null,result=null,savedProducts=[];
+let curStep=0;
+let phB64=null,phMime=null,phRes=[],phIdx=0,phProductDesc='';
+
+const STEPS=[
+  'Analisando produto e imagem...','Pesquisando SEO e tendências 2026...',
+  'Gerando título e descrição otimizados...','Calculando precificação e variações...',
+  'Preenchendo dados fiscais...','Gerando especificações e atributos...',
+  'Finalizando anúncio completo...'
+];
+
+const PH_ANGLES=[
+  {lb:'Frente Principal',ic:'🖼',cl:'#FF5722',pr:'Analise este produto. Descreva como tirar a FRENTE PRINCIPAL para Shopee: produto centralizado, fundo branco, câmera na altura do produto, sem inclinação.'},
+  {lb:'Ângulo 45°',ic:'📐',cl:'#2196F3',pr:'Analise este produto. Descreva como tirar o ÂNGULO 45° para Shopee: câmera posicionada 45 graus acima e levemente de lado, mostrando profundidade e volume.'},
+  {lb:'Vista Lateral',ic:'↔️',cl:'#9C27B0',pr:'Analise este produto. Descreva como tirar a VISTA LATERAL para Shopee: câmera perfeitamente de lado, mostrando espessura e perfil.'},
+  {lb:'Close-up Detalhe',ic:'🔍',cl:'#4CAF50',pr:'Analise este produto. Descreva como tirar um CLOSE-UP de detalhes importantes: textura, acabamento, logo, personalização — para mostrar qualidade.'},
+  {lb:'Flat Lay Aéreo',ic:'🦅',cl:'#FF9800',pr:'Analise este produto. Descreva como seria o FLAT LAY (vista de cima) para Shopee: câmera 90° acima, produto centralizado, composição editorial.'},
+];
+
+// ================================================================
+// INIT
+// ================================================================
+// Chaves gerenciadas pelo server.js
+
+// ================================================================
+// NAV
+// ================================================================
+function showView(v,btn){
+  ['gen','photos','trends','seo','saved'].forEach(id=>{
+    const el=document.getElementById('view-'+id);
+    if(el)el.style.display=id===v?'block':'none';
+  });
+  document.querySelectorAll('.mnav').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  if(v==='saved')renderSavedList();
+}
+
+// ================================================================
+// TOAST
+// ================================================================
+function toast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='show '+(type||'');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.className='',3500);
+}
+
+// ================================================================
+// COPY (with fallback for http://localhost)
+// ================================================================
+function cpText(txt,btnId){
+  const doVisual=()=>{
+    if(btnId){const el=document.getElementById(btnId);if(el){const o=el.textContent;el.textContent='✓ Copiado';el.classList.add('ok');setTimeout(()=>{el.textContent=o;el.classList.remove('ok')},2000);}}
+    toast('✓ Copiado!','ok');
+  };
+  try{
+    if(navigator.clipboard&&window.isSecureContext){
+      navigator.clipboard.writeText(txt||'').then(doVisual).catch(()=>execCopy(txt,doVisual));
+    }else{execCopy(txt,doVisual);}
+  }catch(e){execCopy(txt,doVisual);}
+}
+function execCopy(txt,cb){
+  const ta=document.createElement('textarea');
+  ta.value=txt||'';ta.style.cssText='position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+  document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand('copy');if(cb)cb();}
+  catch(e){toast('Erro ao copiar — selecione e copie manualmente','err');}
+  document.body.removeChild(ta);
+}
+
+// ================================================================
+// IMAGE LOADING
+// ================================================================
+function dov(e,el){e.preventDefault();el.classList.add('ov');}
+function dlv(el){el.classList.remove('ov');}
+function ddr(e,el){e.preventDefault();el.classList.remove('ov');loadImg(e.dataTransfer.files[0]);}
+function phDrop(e,el){e.preventDefault();el.classList.remove('ov');phLoad(e.dataTransfer.files[0]);}
+
+function resizeToBase64(file,maxPx,quality,cb){
+  const url=URL.createObjectURL(file);
+  const img=new Image();
+  img.onload=()=>{
+    let w=img.width,h=img.height;
+    if(w>maxPx||h>maxPx){if(w>h){h=Math.round(h*maxPx/w);w=maxPx;}else{w=Math.round(w*maxPx/h);h=maxPx;}}
+    const cv=document.createElement('canvas');cv.width=w;cv.height=h;
+    cv.getContext('2d').drawImage(img,0,0,w,h);
+    const data=cv.toDataURL('image/jpeg',quality);
+    URL.revokeObjectURL(url);
+    cb(data.split(',')[1],'image/jpeg',data);
+  };
+  img.onerror=()=>toast('❌ Erro ao carregar imagem','err');
+  img.src=url;
+}
+
+function loadImg(file){
+  if(!file||!file.type.startsWith('image/')){toast('❌ Use JPG, PNG ou WEBP','err');return;}
+  resizeToBase64(file,1100,0.85,(b64,mime,dataUrl)=>{
+    imgB64=b64;imgMime=mime;
+    document.getElementById('img-preview').src=dataUrl;
+    document.getElementById('img-preview-area').style.display='block';
+    toast('✓ Foto carregada!','ok');
+  });
+}
+
+function phLoad(file){
+  if(!file||!file.type.startsWith('image/')){toast('❌ Use JPG, PNG ou WEBP','err');return;}
+  resizeToBase64(file,900,0.82,(b64,mime,dataUrl)=>{
+    phB64=b64;phMime=mime;
+    document.getElementById('ph-preview').src=dataUrl;
+    document.getElementById('ph-preview-area').style.display='block';
+    document.getElementById('ph-gen-btn').disabled=false;
+    toast('✓ Foto carregada! Clique em Gerar.','ok');
+  });
+}
+
+// ================================================================
+// CLAUDE API (via Anthropic direct with browser header)
+// ================================================================
+async function callClaude(prompt,maxTokens,systemMsg){
+  const content=[];
+  if(imgB64){content.push({type:'image',source:{type:'base64',media_type:imgMime,data:imgB64}});}
+  content.push({type:'text',text:prompt});
+  const body={messages:[{role:'user',content}],max_tokens:maxTokens||3000};
+  if(systemMsg)body.system=systemMsg;
+  const resp=await fetch('/api/claude',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(body)
+  });
+  const json=await resp.json();
+  if(!resp.ok||json.error)throw new Error(json.error||'Erro '+resp.status);
+  return (json.content||[]).map(b=>b.text||'').join('').trim();
+}
+
+async function callClaudeJSON(prompt,maxTokens){
+  const txt=await callClaude(prompt,maxTokens);
+  const clean=txt.replace(/```json|```/g,'').trim();
+  try{return JSON.parse(clean);}
+  catch(e){
+    const m=clean.match(/\{[\s\S]*\}/);
+    if(m)try{return JSON.parse(m[0]);}catch(_){}
+    throw new Error('Resposta inválida da IA — tente novamente');
+  }
+}
+
+// ================================================================
+// DALL-E API
+// ================================================================
+async function callDalle(prompt,label){
+  const fullPrompt='Professional e-commerce product photo for Shopee marketplace. '+prompt+'. Style: '+label+'. Requirements: pure white background #FFFFFF, perfect studio lighting, no shadows, commercial photography quality, square 1:1 format, high resolution, product centered, photorealistic. No text, no watermarks, no people.';
+  const resp=await fetch('/api/dalle',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({prompt:fullPrompt,size:'1024x1024',quality:'standard',style:'natural'})
+  });
+  const json=await resp.json();
+  if(!resp.ok||json.error)throw new Error(json.error||'Erro DALL-E '+resp.status);
+  return json?.data?.[0]?.url||null;
+}
+
+// ================================================================
+// GENERATE LISTING
+// ================================================================
+function updateSteps(){
+  STEPS.forEach((s,i)=>{
+    const el=document.getElementById('st_'+i);
+    if(!el)return;
+    if(i<curStep){el.className='step done';el.textContent='✓ '+s;}
+    else if(i===curStep){el.className='step active';el.textContent='→ '+s;}
+    else{el.className='step';el.textContent='◦ '+s;}
+  });
+}
+
+async function generate(){
+  const pt=document.getElementById('f_pt').value.trim();
+  if(!pt){toast('⚠ Informe o tipo de produto','err');return;}
+  const cat=document.getElementById('f_cat').value;
+  const mat=document.getElementById('f_mat').value;
+  const occ=document.getElementById('f_occ').value;
+  const cp=document.getElementById('f_cp').value;
+  const brand=document.getElementById('f_brand').value||'ArznStoreSP Personalizados';
+  const weight=document.getElementById('f_weight').value;
+  const dif=document.getElementById('f_dif').value;
+  const ai=document.getElementById('f_ai').value;
+
+  document.getElementById('genBtn').disabled=true;
+  document.getElementById('loadPanel').style.display='block';
+  document.getElementById('resultSection').style.display='none';
+  document.getElementById('stepList').innerHTML=STEPS.map((s,i)=>`<div class="step" id="st_${i}">◦ ${s}</div>`).join('');
+  curStep=0;updateSteps();
+  const si=setInterval(()=>{curStep=Math.min(curStep+1,STEPS.length-1);updateSteps();},800);
+
+  const prompt=`Especialista e-commerce Shopee Brasil 2026 produtos personalizados.${imgB64?' Analise a imagem enviada do produto.':''}
+
+Produto: ${pt} | Categoria: ${cat||'Casa e Decoração > Decoração > Outros'} | Material: ${mat||'não informado'} | Ocasião: ${occ||'presente geral'} | Custo: ${cp?'R$'+cp:'não informado'} | Marca: ${brand} | Peso: ${weight?weight+'kg':'estimar'} | Diferenciais: ${dif||'personalização qualidade'} | Info: ${ai||'nenhuma'}
+
+Gere anúncio COMPLETO para TODAS as 7 abas Shopee 2026. APENAS JSON sem markdown:
+{"infoBasica":{"nome":"título até 120 chars com keywords","nomeAlt":"título alternativo até 120 chars","categoria":"categoria exata Shopee","gtin":"sem GTIN"},"especificacao":{"marca":"${brand}","paisOrigem":"Brasil","material":["m1","m2"],"estilo":["e1"],"estampa":["est1"],"decoracaoSazonal":"Sim","quantidade":1,"produtoPersonalizado":"Sim","garantia":"sem garantia","tamanho":"dimensões estimadas ex 10x10x5cm"},"descricao":"descrição 800-2000 chars emojis bullets profissional Shopee com intro emocional materiais personalização ocasiões diferenciais specs FAQ CTA","informacoesVendas":{"preco":0,"precoMin":0,"precoMax":0,"precoDesconto":0,"percentualDesconto":5,"estoque":10,"variacoes":[{"nome":"Opção","opcoes":["op1","op2"]}],"atacado":[{"qtd":5,"preco":0},{"qtd":10,"preco":0}],"estrategia":"estratégia completa de preço posicionamento margem"},"informacoesFiscais":{"ncm":"código NCM 8 dígitos correto","origem":"0-Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8","cfopMesmoEstado":"5102","cfopOutroEstado":"6102","csosn":"102-Tributada pelo Simples Nacional sem permissão de crédito","unidadeMedida":"UN (UNIDADE)","pisCofinsCst":"49-Outras Operações de Saída","percentualTributos":"5.00","tipoOperacao":"1-Revendedor","infoAdicionais":"descrição fiscal resumida"},"envio":{"peso":0.3,"comprimento":20,"largura":15,"altura":10,"sobEncomenda":"Não","prazoProducao":3,"observacaoEnvio":"instruções embalagem e cuidados"},"outros":{"condicao":"Novo","sku":"ARZN-001","itemAgrupavel":"Não"},"seo":{"tags":["t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13","t14","t15","t16","t17","t18","t19","t20"],"primaryKeywords":["k1","k2","k3","k4","k5"],"longtailKeywords":["f1","f2","f3","f4","f5"],"competition":"análise concorrência e diferenciação","score":85,"scoreDesc":"frase curta sobre qualidade do anúncio"}}`;
+
+  try{
+    const data=await callClaudeJSON(prompt,4000);
+    clearInterval(si);result=data;
+    document.getElementById('loadPanel').style.display='none';
+    document.getElementById('genBtn').disabled=false;
+    showResult();
+    toast('✦ Anúncio completo gerado!','ok');
+  }catch(e){
+    clearInterval(si);
+    document.getElementById('loadPanel').style.display='none';
+    document.getElementById('genBtn').disabled=false;
+    toast('❌ Erro: '+e.message,'err');
+  }
+}
+
+// ================================================================
+// SHOW RESULT
+// ================================================================
+function showResult(){
+  if(!result)return;
+  const score=result.seo?.score||85;
+  document.getElementById('seoBanner').innerHTML=`
+    <div class="score-ring" style="background:conic-gradient(#4CAF50 ${Math.round(score*3.6)}deg,#1C1C25 0)">
+      <div class="score-inner"><span class="score-num">${score}</span></div>
+    </div>
+    <div style="flex:1">
+      <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px">Score SEO: ${score}/100</div>
+      <div style="font-size:13px;color:var(--t2);margin-bottom:6px">${result.seo?.scoreDesc||''}</div>
+      <div class="score-bar"><div class="score-fill" style="width:${score}%"></div></div>
+    </div>`;
+  document.getElementById('resultSection').style.display='block';
+  switchTab('info');
+  document.getElementById('resultSection').scrollIntoView({behavior:'smooth'});
+}
+
+// ================================================================
+// TAB RENDERING
+// ================================================================
+function switchTab(tab,btn){
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  else{const tabs=document.querySelectorAll('.stab');if(tabs[0])tabs[0].classList.add('on');}
+  document.getElementById('tabContent').innerHTML=renderTab(tab);
+}
+
+function mkrc(label,value,id,note){
+  const v=(value||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  return `<div class="rc">
+    <div class="rl">${label}
+      <button class="btn-cp" id="bcp_${id}" onclick="cpText(${JSON.stringify((value||'').toString())},'bcp_${id}')">📋 Copiar</button>
+    </div>
+    <div class="rv">${v}</div>
+    ${note?`<div class="rn">${note}</div>`:''}
+  </div>`;
+}
+
+function renderTab(tab){
+  if(!result)return'';
+  const r=result;
+
+  if(tab==='info'){
+    return mkrc('Nome do Produto — Título Principal',r.infoBasica?.nome,'title',`${(r.infoBasica?.nome||'').length}/120 chars`)
+      +mkrc('Título Alternativo',r.infoBasica?.nomeAlt,'title2',`${(r.infoBasica?.nomeAlt||'').length}/120 chars`)
+      +`<div class="g2" style="gap:12px">${mkrc('Categoria Shopee',r.infoBasica?.categoria,'cat')}${mkrc('GTIN/EAN','Item sem GTIN (marcar checkbox)','gtin')}</div>`
+      +`<div class="info-blk">💡 Cole o título no campo "Nome do Produto" na Informação Básica da Shopee.</div>`
+      +`<div style="background:rgba(255,87,34,.06);border:1.5px solid rgba(255,87,34,.25);border-radius:14px;padding:18px;margin-top:4px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:12px">
+            <div>
+              <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px">✦ Gerar Títulos Alternativos com SEO Melhorado</div>
+              <div style="font-size:12px;color:var(--t2)">A IA gera 5 variações otimizadas com diferentes estratégias de keyword</div>
+            </div>
+            <button class="btn-main" id="genTitlesBtn" onclick="generateTitles()" style="padding:10px 18px;font-size:13px;white-space:nowrap">🔄 Gerar Títulos</button>
+          </div>
+          <div id="titlesArea"></div>
+        </div>`;
+  }
+
+  if(tab==='spec'){
+    const sp=r.especificacao||{};
+    return `<div class="g2" style="gap:12px">
+      ${mkrc('Marca',sp.marca,'marca')}${mkrc('País de Origem',sp.paisOrigem,'pais')}
+      ${mkrc('Material',(sp.material||[]).join(', '),'mat')}${mkrc('Estilo',(sp.estilo||[]).join(', '),'estilo')}
+      ${mkrc('Estampa',(sp.estampa||[]).join(', '),'estampa')}${mkrc('Decoração Sazonal',sp.decoracaoSazonal,'saz')}
+      ${mkrc('Quantidade',String(sp.quantidade||1),'qtd')}${mkrc('Produto Personalizado',sp.produtoPersonalizado,'pers')}
+      ${mkrc('Garantia',sp.garantia,'gar')}${mkrc('Tamanho / Dimensões',sp.tamanho,'tam')}
+    </div>
+    <div class="info-blk">💡 Preencha na aba "Especificação". Mais atributos = maior visibilidade no algoritmo da Shopee.</div>`;
+  }
+
+  if(tab==='desc'){
+    const tags=r.seo?.tags||[];
+    return mkrc('Descrição do Produto',r.descricao,'desc',`${(r.descricao||'').length}/5000 chars`)
+      +`<div class="rc">
+          <div class="rl">Tags SEO (${tags.length}/20)
+            <button class="btn-cp" id="bcp_tags" onclick="cpText(${JSON.stringify(tags.join(', '))},'bcp_tags')">📋 Copiar Todas</button>
+          </div>
+          <div class="tag-wrap" style="margin-bottom:6px">${tags.map(t=>`<span class="tag" onclick="cpText('${t.replace(/'/g,"\\'")}',null)">${t}</span>`).join('')}</div>
+          <div class="rn">${tags.length}/20 tags • Clique na tag para copiar individualmente</div>
+        </div>`
+      +`<div class="g2" style="gap:12px">
+          ${mkrc('Keywords Primárias',(r.seo?.primaryKeywords||[]).map(k=>'• '+k).join('\n'),'pkw')}
+          ${mkrc('Keywords Long-tail',(r.seo?.longtailKeywords||[]).map(k=>'• '+k).join('\n'),'lkw')}
+        </div>`
+      +mkrc('Análise de Concorrência',r.seo?.competition,'comp');
+  }
+
+  if(tab==='sales'){
+    const iv=r.informacoesVendas||{};
+    const vars=(iv.variacoes||[]).map(v=>`• ${v.nome}: ${(v.opcoes||[]).join(', ')}`).join('\n');
+    const atac=(iv.atacado||[]).map(a=>`• ${a.qtd}+ un: R$ ${Number(a.preco||0).toFixed(2)}/un`).join('\n');
+    return `<div class="pboxes">
+        <div class="pbox"><div class="plbl">Preço Mínimo</div><div class="pval">R$ ${Number(iv.precoMin||0).toFixed(2)}</div></div>
+        <div class="pbox hl"><div class="plbl">💡 Preço Sugerido</div><div class="pval hl">R$ ${Number(iv.preco||0).toFixed(2)}</div></div>
+        <div class="pbox"><div class="plbl">Preço Máximo</div><div class="pval">R$ ${Number(iv.precoMax||0).toFixed(2)}</div></div>
+      </div>
+      <div class="g2" style="gap:12px">
+        ${mkrc('Preço com Desconto','R$ '+Number(iv.precoDesconto||0).toFixed(2)+' ('+( iv.percentualDesconto||5)+'% OFF)','pdesc')}
+        ${mkrc('Estoque Sugerido',String(iv.estoque||10)+' unidades','estoque')}
+      </div>`
+      +mkrc('Variações Sugeridas',vars||'Sem variações definidas','vars')
+      +(atac?mkrc('Preços Atacado',atac,'atac'):'')
+      +mkrc('Estratégia de Precificação',iv.estrategia,'estrategia')
+      +`<div class="info-blk">💡 Configure variações em "Informações de Vendas" → "+ Habilitar Variações".</div>`;
+  }
+
+  if(tab==='fiscal'){
+    const fi=r.informacoesFiscais||{};
+    return `<div class="warn-blk">⚠ Confirme os dados fiscais com seu contador. O NCM foi sugerido pela IA com base no produto.</div>
+      <div class="rc">
+        <div class="rl">Dados Fiscais Completos
+          <button class="btn-cp" id="bcp_fiscal" onclick="cpFiscal()">📋 Copiar Tudo</button>
+        </div>
+        <table class="ftable">
+          <tr><td>NCM</td><td>${fi.ncm||''}</td></tr>
+          <tr><td>Origem</td><td>${fi.origem||''}</td></tr>
+          <tr><td>CFOP Mesmo Estado</td><td>${fi.cfopMesmoEstado||'5102'}</td></tr>
+          <tr><td>CFOP Outros Estados</td><td>${fi.cfopOutroEstado||'6102'}</td></tr>
+          <tr><td>CSOSN</td><td>${fi.csosn||''}</td></tr>
+          <tr><td>Unidade de Medida</td><td>${fi.unidadeMedida||'UN'}</td></tr>
+          <tr><td>PIS e COFINS CST</td><td>${fi.pisCofinsCst||''}</td></tr>
+          <tr><td>% Total Tributos</td><td>${fi.percentualTributos||'5.00'}%</td></tr>
+          <tr><td>Tipo de Operação</td><td>${fi.tipoOperacao||''}</td></tr>
+          <tr><td>Info Adicionais NF</td><td>${fi.infoAdicionais||''}</td></tr>
+        </table>
+      </div>`;
+  }
+
+  if(tab==='ship'){
+    const env=r.envio||{};
+    return `<div class="g2" style="gap:12px">
+        ${mkrc('Peso (kg)',String(env.peso||0.3),'peso')}
+        ${mkrc('Dimensões (C×L×A cm)',`${env.comprimento||20} × ${env.largura||15} × ${env.altura||10}`,'dims')}
+        ${mkrc('Sob Encomenda',env.sobEncomenda||'Não','encom')}
+        ${mkrc('Prazo de Produção',env.prazoProducao?env.prazoProducao+' dias úteis':'3 dias úteis','prazo')}
+      </div>`
+      +mkrc('Instruções de Embalagem',env.observacaoEnvio,'obs')
+      +`<div class="info-blk">💡 Preencha peso e dimensões na aba "Envio" para calcular o frete corretamente.</div>`;
+  }
+
+  if(tab==='other'){
+    const ou=r.outros||{};
+    return `<div class="g2" style="gap:12px">
+        ${mkrc('SKU Principal',ou.sku||'ARZN-001','sku')}
+        ${mkrc('Condição',ou.condicao||'Novo','cond')}
+        ${mkrc('Item Agrupável',ou.itemAgrupavel||'Não','agrup')}
+        ${mkrc('Agendar Publicação','Publicar imediatamente','pub')}
+      </div>
+      <div class="info-blk">💡 SKU sugerido: use padrão ARZN-CANECA-001, ARZN-ALMOFADA-002 para facilitar o controle de estoque.</div>`;
+  }
+  return '';
+}
+
+// ================================================================
+// TITLE GENERATOR
+// ================================================================
+async function generateTitles(){
+  if(!result)return;
+  const btn=document.getElementById('genTitlesBtn');
+  const area=document.getElementById('titlesArea');
+  btn.disabled=true;btn.textContent='⏳ Gerando...';
+  area.innerHTML='<div style="text-align:center;padding:20px"><div class="spinner" style="width:28px;height:28px;border-width:2px"></div><div style="color:var(--t2);margin-top:10px;font-size:13px">Gerando 5 títulos otimizados...</div></div>';
+
+  const pt=document.getElementById('f_pt')?.value||result.infoBasica?.nome||'produto';
+  const tags=(result.seo?.primaryKeywords||[]).join(', ');
+
+  try{
+    const d=await callClaudeJSON(`Especialista SEO Shopee Brasil 2026. Gere 5 variações de título OTIMIZADAS.
+Produto: ${pt} | Keywords: ${tags} | Título atual: ${result.infoBasica?.nome||''}
+Regras: máximo 120 chars, começar com keyword principal, cada título com abordagem diferente (ocasião/material/público/benefício/urgência).
+APENAS JSON: {"titulos":[{"titulo":"t","score":95,"estrategia":"por que funciona"}]}`,2000);
+
+    if(!d.titulos?.length)throw new Error('Sem títulos retornados');
+    let html='<div style="display:flex;flex-direction:column;gap:10px">';
+    d.titulos.forEach((t,i)=>{
+      const sc=t.score||80;const chars=(t.titulo||'').length;
+      const scCor=sc>=90?'#4CAF50':sc>=80?'#FF9800':'#999';
+      const chCor=chars<=120?'#4CAF50':'#f44336';
+      html+=`<div style="background:var(--s2);border:1px solid var(--bd);border-radius:11px;padding:14px;transition:border-color .18s" onmouseover="this.style.borderColor='var(--or)'" onmouseout="this.style.borderColor='var(--bd)'">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div style="flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--o3);color:var(--or);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center">${i+1}</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:14px;font-weight:600;line-height:1.5;margin-bottom:8px">${t.titulo||''}</div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span style="font-size:11px;font-weight:700;color:${scCor};background:${scCor}22;padding:2px 9px;border-radius:10px">SEO ${sc}/100</span>
+              <span style="font-size:11px;color:${chCor};font-family:monospace">${chars}/120</span>
+              <span style="font-size:11px;color:var(--t2)">${t.estrategia||''}</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
+            <button class="btn-cp" id="bcp_t${i}" onclick="cpText(${JSON.stringify(t.titulo||'')},'bcp_t${i}')">📋 Copiar</button>
+            <button class="btn-sec" style="font-size:11px;padding:5px 10px" onclick="applyTitle(${JSON.stringify(t.titulo||'')})">✓ Usar Este</button>
+          </div>
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+    area.innerHTML=html;
+  }catch(e){
+    area.innerHTML=`<div style="color:var(--t2);text-align:center;padding:16px">Erro: ${e.message}</div>`;
+  }
+  btn.disabled=false;btn.textContent='🔄 Gerar Títulos';
+}
+
+function applyTitle(titulo){
+  if(!result)return;
+  if(!result.infoBasica)result.infoBasica={};
+  result.infoBasica.nome=titulo;
+  switchTab('info');
+  toast('✓ Título aplicado!','ok');
+}
+
+// ================================================================
+// COPY HELPERS
+// ================================================================
+function cpFiscal(){
+  if(!result)return;
+  const fi=result.informacoesFiscais||{};
+  const txt='NCM: '+(fi.ncm||'')+'\nOrigem: '+(fi.origem||'')+'\nCFOP Mesmo Estado: '+(fi.cfopMesmoEstado||'5102')+'\nCFOP Outros Estados: '+(fi.cfopOutroEstado||'6102')+'\nCSOSN: '+(fi.csosn||'')+'\nUnidade: '+(fi.unidadeMedida||'UN')+'\nPIS/COFINS CST: '+(fi.pisCofinsCst||'')+'\n% Tributos: '+(fi.percentualTributos||'5.00')+'%\nTipo Operação: '+(fi.tipoOperacao||'')+'\nInfo Adicionais: '+(fi.infoAdicionais||'');
+  cpText(txt,'bcp_fiscal');
+}
+
+function buildFull(){
+  if(!result)return'';
+  const r=result;const iv=r.informacoesVendas||{};const env=r.envio||{};const fi=r.informacoesFiscais||{};const sp=r.especificacao||{};const ou=r.outros||{};
+  return '===== ANÚNCIO SHOPEE — ARZNSTORESP PERSONALIZADOS =====\n\n[INFO BÁSICA]\nNome: '+(r.infoBasica?.nome||'')+'\nTítulo Alt: '+(r.infoBasica?.nomeAlt||'')+'\nCategoria: '+(r.infoBasica?.categoria||'')+'\n\n[ESPECIFICAÇÃO]\nMarca: '+(sp.marca||'')+' | País: '+(sp.paisOrigem||'Brasil')+'\nMaterial: '+((sp.material||[]).join(', '))+'\nEstilo: '+((sp.estilo||[]).join(', '))+'\nTamanho: '+(sp.tamanho||'')+'\n\n[DESCRIÇÃO]\n'+(r.descricao||'')+'\n\n[TAGS SEO]\n'+((r.seo?.tags||[]).join(', '))+'\n\n[VENDAS]\nPreço: R$ '+Number(iv.preco||0).toFixed(2)+'\nDesconto: R$ '+Number(iv.precoDesconto||0).toFixed(2)+' ('+( iv.percentualDesconto||5)+'% OFF)\nEstoque: '+(iv.estoque||10)+'\n\n[FISCAL]\nNCM: '+(fi.ncm||'')+' | CFOP: '+(fi.cfopMesmoEstado||'5102')+'/'+( fi.cfopOutroEstado||'6102')+'\n\n[ENVIO]\nPeso: '+(env.peso||0.3)+'kg | Dimensões: '+(env.comprimento||20)+'x'+(env.largura||15)+'x'+(env.altura||10)+'cm\n\n[OUTROS]\nSKU: '+(ou.sku||'')+' | Condição: '+(ou.condicao||'Novo')+'\n\n====================================================';
+}
+
+function copyAll(){cpText(buildFull(),null);toast('✓ Anúncio completo copiado!','ok');}
+function downloadTxt(){
+  const blob=new Blob([buildFull()],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');a.download='anuncio-shopee-arzn.txt';a.href=URL.createObjectURL(blob);a.click();
+  toast('✓ .TXT baixado!','ok');
+}
+function copyShopee(){
+  if(!result)return;
+  const r=result;const iv=r.informacoesVendas||{};
+  const txt='NOME DO PRODUTO:\n'+(r.infoBasica?.nome||'')+'\n\nDESCRIÇÃO DO PRODUTO:\n'+(r.descricao||'')+'\n\nPREÇO: R$ '+Number(iv.preco||0).toFixed(2)+'\n\nPALAVRAS-CHAVE:\n'+((r.seo?.tags||[]).join('\n'));
+  cpText(txt,null);toast('✓ Formato Shopee copiado!','ok');
+}
+
+function resetForm(){
+  imgB64=null;imgMime=null;result=null;
+  document.getElementById('img-preview-area').style.display='none';
+  document.getElementById('fi-main').value='';
+  ['f_pt','f_cat','f_mat','f_occ','f_cp','f_brand','f_weight','f_dif','f_ai'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('resultSection').style.display='none';
+  toast('Formulário limpo','info');
+}
+
+// ================================================================
+// SAVED PRODUCTS
+// ================================================================
+function saveProduct(){
+  if(!result)return;
+  const iv=result.informacoesVendas||{};
+  const saved={
+    id:Date.now(),nome:result.infoBasica?.nome||'Produto sem nome',
+    preco:iv.preco||0,categoria:result.infoBasica?.categoria||'',
+    descricao:result.descricao||'',tags:(result.seo?.tags||[]).join(','),
+    marca:result.especificacao?.marca||'ArznStoreSP',
+    material:(result.especificacao?.material||[]).join(', '),
+    peso:result.envio?.peso||0.3,comprimento:result.envio?.comprimento||20,
+    largura:result.envio?.largura||15,altura:result.envio?.altura||10,
+    estoque:iv.estoque||10,sku:result.outros?.sku||'ARZN-001',
+    ncm:result.informacoesFiscais?.ncm||'',condicao:result.outros?.condicao||'Novo',
+    variacoes:(iv.variacoes||[]).map(v=>v.nome+': '+(v.opcoes||[]).join('/')).join(' | '),
+    precoDesconto:iv.precoDesconto||0,result:JSON.parse(JSON.stringify(result)),
+    savedAt:new Date().toLocaleString('pt-BR')
+  };
+  savedProducts.push(saved);
+  updateNavCount();
+  toast('💾 Produto salvo! Total: '+savedProducts.length,'ok');
+}
+
+function updateNavCount(){
+  const nc=document.getElementById('nav-count');
+  if(nc){nc.textContent=savedProducts.length;nc.style.display=savedProducts.length>0?'inline':'none';}
+}
+
+function renderSavedList(){
+  const el=document.getElementById('savedList');
+  if(!el)return;
+  if(savedProducts.length===0){
+    el.innerHTML=`<div class="empty"><div class="empty-icon">📦</div><div class="empty-title" style="color:var(--t2)">Nenhum produto salvo ainda</div><div class="empty-sub" style="color:var(--mu)">Gere um anúncio e clique em "💾 Salvar Produto"</div></div>`;
+    return;
+  }
+  el.innerHTML=savedProducts.map((p,i)=>`
+    <div class="product-row">
+      <div class="product-row-num">${i+1}</div>
+      <div class="product-row-info">
+        <div class="product-row-name">${p.nome}</div>
+        <div class="product-row-meta">SKU: ${p.sku} • ${p.categoria||'Sem categoria'} • Estoque: ${p.estoque} un • ${p.savedAt}</div>
+      </div>
+      <div class="product-row-price">R$ ${Number(p.preco).toFixed(2)}</div>
+      <button class="product-row-del" onclick="deleteSaved(${p.id})">✕</button>
+    </div>`).join('');
+}
+
+function deleteSaved(id){savedProducts=savedProducts.filter(p=>p.id!==id);updateNavCount();renderSavedList();toast('Produto removido','info');}
+function clearSaved(){if(!savedProducts.length)return;if(!confirm('Remover todos os '+savedProducts.length+' produtos?'))return;savedProducts=[];updateNavCount();renderSavedList();toast('Lista limpa','info');}
+
+function exportExcel(){
+  if(!savedProducts.length){toast('⚠ Nenhum produto salvo','err');return;}
+  const cols=['Nome do Produto','Categoria','Descrição','Preço','Preço c/Desconto','Estoque','SKU','Marca','Material','Peso kg','Comprimento cm','Largura cm','Altura cm','Condição','NCM','Tags/Palavras-chave','Variações','CFOP Mesmo Estado','CFOP Outros Estados','CSOSN'];
+  document.getElementById('excelInfo').textContent=savedProducts.length+' produto(s)';
+  let html=`<div class="info-blk" style="margin-bottom:14px">✓ Formato Shopee para upload em massa via Central do Vendedor → Produtos → Adicionar em Massa</div><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;min-width:900px"><thead><tr style="background:var(--s3)">${cols.map(c=>`<th style="padding:9px 11px;text-align:left;border:1px solid var(--bd);font-size:10px;color:var(--or);white-space:nowrap;font-weight:700">${c}</th>`).join('')}</tr></thead><tbody>${savedProducts.map((p,i)=>`<tr style="background:${i%2===0?'var(--s2)':'var(--s3)'}">
+    <td style="padding:9px 11px;border:1px solid var(--bd);font-weight:600;max-width:200px">${p.nome.substring(0,100)}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd)">${p.categoria}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(p.descricao||'').substring(0,60)}...</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);font-family:monospace;color:var(--or);font-weight:700">R$ ${Number(p.preco).toFixed(2)}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);font-family:monospace">${p.precoDesconto?'R$ '+Number(p.precoDesconto).toFixed(2):'-'}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);text-align:center">${p.estoque}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);font-family:monospace;font-size:11px">${p.sku}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd)">${p.marca}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd)">${p.material}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);text-align:center">${p.peso}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);text-align:center">${p.comprimento}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);text-align:center">${p.largura}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);text-align:center">${p.altura}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd)">${p.condicao}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);font-family:monospace;font-size:11px">${p.ncm}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px">${p.tags}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);font-size:11px">${p.variacoes||'-'}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);font-family:monospace">${p.result?.informacoesFiscais?.cfopMesmoEstado||'5102'}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);font-family:monospace">${p.result?.informacoesFiscais?.cfopOutroEstado||'6102'}</td>
+    <td style="padding:9px 11px;border:1px solid var(--bd);font-size:11px">${p.result?.informacoesFiscais?.csosn||'102'}</td>
+  </tr>`).join('')}</tbody></table></div>`;
+  document.getElementById('excelPreview').innerHTML=html;
+  document.getElementById('excelModal').classList.add('open');
+}
+
+function downloadExcel(){
+  const esc=v=>`"${String(v||'').replace(/"/g,'""')}"`;
+  const cols=['Nome do Produto','Categoria','Descricao','Preco','Preco Desconto','Estoque','SKU','Marca','Material','Peso kg','Comprimento cm','Largura cm','Altura cm','Condicao','NCM','Tags','Variacoes','CFOP Mesmo Estado','CFOP Outros Estados','CSOSN'];
+  const rows=[cols.map(esc).join(',')];
+  savedProducts.forEach(p=>{
+    rows.push([p.nome.substring(0,120),p.categoria,(p.descricao||'').substring(0,2000).replace(/\n/g,' '),
+      Number(p.preco).toFixed(2),p.precoDesconto?Number(p.precoDesconto).toFixed(2):'',
+      p.estoque,p.sku,p.marca,p.material,p.peso,p.comprimento,p.largura,p.altura,p.condicao,p.ncm,p.tags,p.variacoes||'',
+      p.result?.informacoesFiscais?.cfopMesmoEstado||'5102',p.result?.informacoesFiscais?.cfopOutroEstado||'6102',p.result?.informacoesFiscais?.csosn||'102'
+    ].map(esc).join(','));
+  });
+  const blob=new Blob(['\uFEFF'+rows.join('\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.download='shopee-upload-arzn-'+savedProducts.length+'itens-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.href=URL.createObjectURL(blob);a.click();
+  document.getElementById('excelModal').classList.remove('open');
+  toast('✓ Excel baixado! '+savedProducts.length+' produtos','ok');
+}
+
+// ================================================================
+// PHOTOS (DALL-E)
+// ================================================================
+async function phDescribe(){
+  const resp=await fetch('/api/claude',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({max_tokens:300,messages:[{role:'user',content:[
+      {type:'image',source:{type:'base64',media_type:phMime,data:phB64}},
+      {type:'text',text:'Descreva este produto em 2-3 frases objetivas em inglês incluindo: tipo, cores, materiais visíveis e características principais. Para uso em prompt de geração de imagem. Seja específico.'}
+    ]}]})
+  });
+  const json=await resp.json();
+  if(!resp.ok||json.error)throw new Error(json.error||'Erro');
+  return (json.content||[]).map(b=>b.text||'').join('').trim();
+}
+
+async function phAnalyze(prompt){
+  const resp=await fetch('/api/claude',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({max_tokens:900,messages:[{role:'user',content:[
+      {type:'image',source:{type:'base64',media_type:phMime,data:phB64}},
+      {type:'text',text:prompt+'\n\nResponda SOMENTE com JSON puro sem markdown:\n{"desc":"como tirar esta foto passo a passo","dest":"por que este ângulo vende mais na Shopee","dica":"1 dica prática de setup","equip":"equipamento mínimo necessário","dalle_prompt":"professional product photography, angle, pure white background, studio lighting, commercial quality, 1:1 square format","tags":["tag1","tag2","tag3","tag4","tag5"]}'}
+    ]}]})
+  });
+  const json=await resp.json();
+  const txt=(json.content||[]).map(b=>b.text||'').join('').trim();
+  let obj=null;
+  try{obj=JSON.parse(txt);}catch(_){}
+  if(!obj){const m=txt.match(/\{[\s\S]*\}/);if(m)try{obj=JSON.parse(m[0]);}catch(_){}}
+  if(!obj)obj={desc:txt,dest:'Análise gerada.',dica:'Siga as orientações.',equip:'Celular + fundo branco.',dalle_prompt:'product photography white background studio',tags:[]};
+  return obj;
+}
+
+function phSetLoad(step,pct,msg){
+  document.getElementById('ph-gen-btn').disabled=true;
+  document.getElementById('ph-gen-btn').textContent='Gerando… '+pct+'%';
+  document.getElementById('ph-prog').style.display='flex';
+  document.getElementById('ph-pf').style.width=pct+'%';
+  document.getElementById('ph-pt').textContent=msg;
+}
+
+function phRenderTabs(){
+  const el=document.getElementById('ph-tabs');el.innerHTML='';
+  phRes.forEach((r,i)=>{
+    const b=document.createElement('button');
+    b.className='atab'+(i===phIdx?' on':'');
+    const ic=r.st==='done'?'<span style="color:#4CAF50;font-size:10px">✓</span>':r.st==='err'?'<span style="color:#f55;font-size:10px">✗</span>':'<span class="spinner" style="width:11px;height:11px;border-width:1.5px;display:inline-block"></span>';
+    b.innerHTML=`<span style="font-size:14px">${r.ic}</span>${r.lb} ${ic}`;
+    b.onclick=()=>{phIdx=i;phRenderTabs();phRenderCard();};
+    el.appendChild(b);
+  });
+  document.getElementById('ph-dc').textContent='('+phRes.filter(r=>r.st==='done').length+'/5 prontos)';
+}
+
+function phRenderCard(){
+  const area=document.getElementById('ph-card');
+  const r=phRes[phIdx];if(!r){area.innerHTML='';return;}
+  if(r.st==='load'||r.st==='img'){
+    area.innerHTML=`<div class="angle-card"><div class="angle-img-wrap" style="min-height:200px"><div style="text-align:center;color:var(--t2);font-size:13px">${r.st==='img'?'Gerando foto com DALL-E 3…':'Analisando com Claude…'}</div></div></div>`;
+    return;
+  }
+  if(r.st==='err'){
+    area.innerHTML=`<div class="angle-card" style="padding:40px;text-align:center;color:#ff8585">⚠ Erro: ${r.msg}</div>`;return;
+  }
+  if(!r.d){area.innerHTML='';return;}
+  const d=r.d;
+  const tags=(d.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+  let imgHtml='';
+  if(r.imgUrl){
+    imgHtml=`<div class="angle-img-wrap"><img class="angle-img" src="${r.imgUrl}" alt="${r.lb}" crossorigin="anonymous"/><div class="angle-img-badge">DALL-E 3 · 1024×1024</div><a class="angle-dl" href="${r.imgUrl}" download="shopee_${r.lb.replace(/\s/g,'_').toLowerCase()}.jpg" target="_blank">⬇ Baixar foto</a></div>`;
+  }
+  area.innerHTML=`<div class="angle-card">
+    ${imgHtml}
+    <div class="angle-head" style="background:linear-gradient(135deg,${r.cl}12,transparent)">
+      <div style="width:42px;height:42px;border-radius:12px;background:${r.cl}1c;border:1px solid ${r.cl}30;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${r.ic}</div>
+      <div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px">${r.lb}</div><div style="font-size:12px;color:var(--mu)">Ângulo ${phIdx+1} de 5 · Shopee 1:1 · 1024×1024px</div></div>
+    </div>
+    <div class="angle-body">
+      <div class="ib full ac"><div class="il">📷 Como tirar esta foto</div><div class="it">${d.desc}</div></div>
+      <div class="ib"><div class="il">⭐ Por que converte mais</div><div class="it">${d.dest}</div></div>
+      <div class="ib or"><div class="il or">🛍 Dica Shopee</div><div class="it">${d.dica}</div></div>
+      <div class="ib"><div class="il">💡 Equipamento</div><div class="it">${d.equip||'Celular com câmera boa + fundo branco + luz natural.'}</div></div>
+      <div class="ib full"><div class="il"># Tags</div><div class="tag-wrap">${tags}</div></div>
+    </div>
+  </div>`;
+}
+
+async function phGen(){
+  if(!phB64){toast('❌ Envie uma foto primeiro','err');return;}
+  phRes=[];phIdx=0;
+  document.getElementById('ph-results').style.display='block';
+  setTimeout(()=>document.getElementById('ph-results').scrollIntoView({behavior:'smooth',block:'start'}),80);
+
+  phSetLoad(0,2,'Identificando produto…');
+  try{phProductDesc=await phDescribe();toast('✅ Produto identificado!','ok');}
+  catch(e){toast('⚠ '+e.message,'err');phResetBtn();return;}
+
+  for(let i=0;i<PH_ANGLES.length;i++){
+    const pct=Math.round(2+(i/PH_ANGLES.length)*92);
+    phSetLoad(i*2,pct,'('+(i+1)+'/5) Analisando: '+PH_ANGLES[i].lb+'…');
+    phRes[i]={...PH_ANGLES[i],st:'load',d:null,msg:null,imgUrl:null};
+    phRenderTabs();if(i===phIdx)phRenderCard();
+
+    let analysisData=null;
+    try{
+      analysisData=await phAnalyze(PH_ANGLES[i].pr);
+      phRes[i]={...PH_ANGLES[i],st:'img',d:analysisData,msg:null,imgUrl:null};
+      phRenderTabs();if(i===phIdx)phRenderCard();
+      toast('🧠 Análise pronta: '+PH_ANGLES[i].lb,'info');
+    }catch(e){
+      phRes[i]={...PH_ANGLES[i],st:'err',d:null,msg:e.message,imgUrl:null};
+      phRenderTabs();if(i===phIdx)phRenderCard();
+      continue;
+    }
+
+    const pct2=Math.round(2+((i+0.6)/PH_ANGLES.length)*92);
+    phSetLoad(i*2+1,pct2,'('+(i+1)+'/5) Gerando foto: '+PH_ANGLES[i].lb+'…');
+    try{
+      const dp=analysisData?.dalle_prompt||PH_ANGLES[i].lb+' product photo white background';
+      const iurl=await callDalle(dp+'. Product: '+phProductDesc,PH_ANGLES[i].lb);
+      phRes[i]={...PH_ANGLES[i],st:'done',d:analysisData,msg:null,imgUrl:iurl};
+      toast('🎨 Foto gerada: '+PH_ANGLES[i].lb,'ok');
+    }catch(e){
+      phRes[i]={...PH_ANGLES[i],st:'done',d:analysisData,msg:null,imgUrl:null};
+      toast('⚠ Foto falhou: '+e.message,'err');
+    }
+    phRenderTabs();if(i===phIdx)phRenderCard();
+  }
+
+  phResetBtn();phIdx=0;phRenderTabs();phRenderCard();
+  const done=phRes.filter(r=>r.st==='done').length;
+  const withImg=phRes.filter(r=>r.imgUrl).length;
+  toast('🎉 '+done+'/5 análises · '+withImg+'/5 fotos geradas!','ok');
+}
+
+function phResetBtn(){
+  const btn=document.getElementById('ph-gen-btn');
+  btn.disabled=false;btn.textContent='✦ Gerar 5 Ângulos + Fotos';
+  document.getElementById('ph-prog').style.display='none';
+}
+
+// ================================================================
+// TRENDS
+// ================================================================
+function quickTrend(q){document.getElementById('trendQ').value=q;searchTrends();}
+
+async function searchTrends(){
+  const q=document.getElementById('trendQ').value.trim();
+  if(!q){toast('⚠ Digite um produto','err');return;}
+  const btn=document.getElementById('trendBtn');
+  btn.disabled=true;btn.textContent='⏳ Buscando...';
+  const res=document.getElementById('trendSearchResults');
+  res.innerHTML=`<div class="panel" style="margin-bottom:20px"><div class="panel-hd">🔍 Tendências para: <span style="color:var(--or)">${q}</span></div><div class="panel-bd" style="text-align:center;padding:30px"><div class="spinner" style="width:28px;height:28px;border-width:2px"></div><div style="color:var(--t2);margin-top:12px;font-size:13px">Analisando tendências...</div></div></div>`;
+  try{
+    const d=await callClaudeJSON(`Especialista e-commerce Shopee Brasil 2026. Tendências para "${q}" produtos personalizados. APENAS JSON:
+{"produto":"${q}","resumo":"resumo 2 frases","temas":[{"tema":"nome","descricao":"por que em alta","publico":"quem compra","crescimento":"+XX%","exemplos":["ex1","ex2","ex3"]}],"cores":[{"cor":"nome","hex":"#XXXXXX","contexto":"quando usar"}],"frases":["frase vende 1","frase 2","frase 3","frase 4","frase 5"],"ocasioes":[{"nome":"ocasião","meses":"meses","potencial":"alto/médio/baixo"}],"publicoAlvo":[{"perfil":"nome","descricao":"quem é","ticketMedio":"R$ XX"}],"dicasVenda":["dica 1","dica 2","dica 3"],"palavrasChave":["kw1","kw2","kw3","kw4","kw5","kw6","kw7","kw8"]}`,3000);
+
+    let html=`<div class="panel" style="margin-bottom:20px">
+      <div class="panel-hd" style="background:var(--o3);border-bottom-color:rgba(255,87,34,.2)">
+        🔍 Tendências para: <span style="color:var(--or);font-weight:700">${d.produto||q}</span>
+        <button class="btn-sec" style="margin-left:auto;font-size:12px;padding:5px 12px" onclick="document.getElementById('trendSearchResults').innerHTML=''">✕ Fechar</button>
+      </div>
+      <div class="panel-bd">`;
+
+    if(d.resumo)html+=`<div class="info-blk" style="font-size:14px"><b>📊 Panorama 2026:</b> ${d.resumo}</div>`;
+
+    if(d.temas?.length){
+      html+=`<div style="font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">🎨 Temas & Estilos em Alta</div>`;
+      html+=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:20px">`;
+      d.temas.forEach(t=>{
+        html+=`<div style="background:var(--s2);border:1px solid var(--bd);border-radius:11px;padding:15px;cursor:pointer;transition:border-color .18s" onmouseover="this.style.borderColor='var(--or)'" onmouseout="this.style.borderColor='var(--bd)'" onclick="document.getElementById('f_pt').value='${q} ${t.tema.replace(/'/g,"\\'")}';showView('gen',document.querySelector('.mnav'));toast('✦ ${t.tema.replace(/'/g,"\\'")} aplicado!','ok')">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
+            <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px">${t.tema}</span>
+            <span style="font-size:11px;font-weight:700;color:#4CAF50;background:rgba(76,175,80,.12);padding:2px 9px;border-radius:10px">${t.crescimento}</span>
+          </div>
+          <div style="font-size:12px;color:var(--t2);margin-bottom:7px;line-height:1.5">${t.descricao}</div>
+          <div style="font-size:11px;color:var(--mu);margin-bottom:8px">👥 ${t.publico}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px">${(t.exemplos||[]).map(e=>`<span style="background:var(--o3);color:var(--o2);border-radius:12px;padding:2px 9px;font-size:11px">${e}</span>`).join('')}</div>
+          <div style="margin-top:9px;font-size:11px;color:var(--or);font-weight:600">▸ Clique para gerar anúncio</div>
+        </div>`;
+      });
+      html+=`</div>`;
+    }
+
+    html+=`<div class="g2" style="gap:14px;margin-bottom:18px">`;
+    if(d.cores?.length){
+      html+=`<div style="background:var(--s2);border:1px solid var(--bd);border-radius:11px;padding:15px"><div style="font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">🎨 Cores em Tendência</div>`;
+      d.cores.forEach(c=>{
+        html+=`<div style="display:flex;align-items:center;gap:11px;padding:8px 0;border-bottom:1px solid var(--bd)"><div style="width:30px;height:30px;border-radius:7px;background:${c.hex||'#888'};flex-shrink:0;border:1.5px solid rgba(255,255,255,.1)"></div><div><div style="font-size:13px;font-weight:600">${c.cor}</div><div style="font-size:11px;color:var(--t2)">${c.contexto}</div></div><div style="font-size:10px;color:var(--mu);margin-left:auto;font-family:monospace">${c.hex||''}</div></div>`;
+      });
+      html+=`</div>`;
+    }
+    if(d.frases?.length){
+      html+=`<div style="background:var(--s2);border:1px solid var(--bd);border-radius:11px;padding:15px"><div style="font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">✍ Frases que Vendem</div>`;
+      d.frases.forEach(f=>{
+        html+=`<div onclick="cpText('${f.replace(/'/g,"\\'")}',null)" style="padding:9px 11px;background:var(--s3);border-radius:8px;margin-bottom:7px;font-size:13px;cursor:pointer;border:1px solid transparent;transition:all .18s;line-height:1.4" onmouseover="this.style.borderColor='var(--or)'" onmouseout="this.style.borderColor='transparent'">"${f}" <span style="font-size:10px;opacity:.4">▸ copiar</span></div>`;
+      });
+      html+=`</div>`;
+    }
+    html+=`</div>`;
+
+    html+=`<div class="g2" style="gap:14px;margin-bottom:18px">`;
+    if(d.ocasioes?.length){
+      html+=`<div style="background:var(--s2);border:1px solid var(--bd);border-radius:11px;padding:15px"><div style="font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">📅 Melhores Ocasiões</div>`;
+      d.ocasioes.forEach(o=>{const pc=o.potencial==='alto'?'#4CAF50':o.potencial==='médio'?'#FF9800':'#555';html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd)"><div><div style="font-size:13px;font-weight:600">${o.nome}</div><div style="font-size:11px;color:var(--t2)">${o.meses}</div></div><span style="font-size:11px;font-weight:700;color:${pc};background:${pc}22;padding:2px 9px;border-radius:10px">${o.potencial}</span></div>`;});
+      html+=`</div>`;
+    }
+    if(d.publicoAlvo?.length){
+      html+=`<div style="background:var(--s2);border:1px solid var(--bd);border-radius:11px;padding:15px"><div style="font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">👥 Público-alvo</div>`;
+      d.publicoAlvo.forEach(p=>{html+=`<div style="padding:9px 0;border-bottom:1px solid var(--bd)"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:13px;font-weight:600">${p.perfil}</span><span style="font-size:13px;font-weight:700;color:var(--or);font-family:monospace">${p.ticketMedio}</span></div><div style="font-size:12px;color:var(--t2)">${p.descricao}</div></div>`;});
+      html+=`</div>`;
+    }
+    html+=`</div>`;
+
+    if(d.dicasVenda?.length){
+      html+=`<div style="background:var(--o4);border:1px solid rgba(255,87,34,.2);border-radius:11px;padding:15px;margin-bottom:14px"><div style="font-size:11px;font-weight:700;color:var(--or);text-transform:uppercase;letter-spacing:1px;margin-bottom:11px">💡 Dicas de Venda</div>${d.dicasVenda.map(dv=>`<div style="display:flex;gap:9px;font-size:13px;margin-bottom:8px"><span style="color:var(--or);flex-shrink:0">▸</span><span style="line-height:1.5">${dv}</span></div>`).join('')}</div>`;
+    }
+    if(d.palavrasChave?.length){
+      html+=`<div style="background:var(--s2);border:1px solid var(--bd);border-radius:11px;padding:15px"><div style="font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">🔑 Palavras-chave Estratégicas</div><div class="tag-wrap">${d.palavrasChave.map(k=>`<span class="tag" onclick="cpText('${k.replace(/'/g,"\\'")}',null)">${k}</span>`).join('')}</div></div>`;
+    }
+    html+=`</div></div>`;
+    res.innerHTML=html;
+    res.scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){
+    res.innerHTML=`<div class="panel"><div class="panel-bd" style="text-align:center;padding:30px;color:var(--t2)">Erro: ${e.message}</div></div>`;
+  }
+  btn.disabled=false;btn.textContent='🔍 Buscar';
+}
+
+async function loadTrends(){
+  const btn=document.getElementById('trendsGenBtn');
+  btn.disabled=true;btn.textContent='⏳ Buscando...';
+  document.getElementById('trendsContent').innerHTML='<div style="text-align:center;padding:40px"><div class="spinner" style="margin:0 auto 12px"></div><div style="color:var(--t2)">Buscando tendências 2026...</div></div>';
+  try{
+    const d=await callClaudeJSON(`Especialista e-commerce Brasil 2026. Tendências produtos personalizados Shopee. APENAS JSON com 8 tendências:
+{"insight":"frase curta mercado 2026","occasions":["Dia das Mães","Dia dos Namorados","Dia dos Pais","Natal 2026","Casamentos 2026"],"trends":[{"name":"produto","trend":"Em Alta ou Explosivo","growth":"+XX%","opportunity":"oportunidade","keywords":["k1","k2","k3"],"tip":"dica"}]}`,2500);
+
+    let html='';
+    if(d.insight)html+=`<div class="info-blk" style="font-size:14px"><b>💡 Insight 2026:</b> ${d.insight}</div>`;
+    if(d.occasions)html+=`<div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px">${d.occasions.map(o=>`<span class="tag">${o}</span>`).join('')}</div>`;
+    (d.trends||[]).forEach(t=>{
+      const col=t.trend==='Explosivo'?'var(--or)':'#4CAF50';
+      html+=`<div class="panel" style="cursor:pointer;margin-bottom:10px" onclick="document.getElementById('f_pt').value='${t.name.replace(/'/g,"\\'")}';showView('gen',document.querySelector('.mnav'));toast('✦ ${t.name.replace(/'/g,"\\'")} aplicado!','ok')">
+        <div class="panel-bd">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px">
+            <span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700">${t.name}</span>
+            <span style="font-size:11px;font-weight:700;color:${col};background:${col}22;padding:2px 9px;border-radius:10px">${t.trend} ${t.growth}</span>
+          </div>
+          <div style="font-size:13px;color:var(--t2);margin-bottom:8px;line-height:1.5">${t.opportunity}</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px">${(t.keywords||[]).map(k=>`<span style="background:var(--s2);color:var(--t2);padding:2px 9px;border-radius:4px;font-size:11px">${k}</span>`).join('')}</div>
+          <div style="font-size:12px;color:var(--or)">💡 ${t.tip}</div>
+        </div>
+      </div>`;
+    });
+    document.getElementById('trendsContent').innerHTML=html||'<div style="color:var(--t2);text-align:center;padding:40px">Nenhum dado retornado. Tente novamente.</div>';
+  }catch(e){document.getElementById('trendsContent').innerHTML=`<div style="color:var(--t2);text-align:center;padding:40px">Erro: ${e.message}</div>`;}
+  btn.disabled=false;btn.textContent='🔄 Atualizar com IA';
+}
+
+// ================================================================
+// SEO
+// ================================================================
+async function searchSEO(){
+  const q=document.getElementById('seoQ').value.trim();
+  if(!q)return;
+  const btn=document.getElementById('seoBtn');
+  btn.disabled=true;btn.textContent='⏳';
+  document.getElementById('seoResults').innerHTML='<div style="text-align:center;padding:40px"><div class="spinner" style="margin:0 auto"></div></div>';
+  try{
+    const d=await callClaudeJSON(`SEO Shopee Brasil 2026. Keywords para "${q}" produtos personalizados. APENAS JSON:
+{"primary":[{"kw":"palavra","volume":"alto/médio/baixo","competition":"alta/média/baixa"}],"longtail":["frase 1","frase 2","frase 3","frase 4","frase 5","frase 6"],"negative":["evitar 1","evitar 2"],"titleTemplate":"template título otimizado com keywords"}`,2000);
+
+    let html='';
+    if(d.titleTemplate)html+=`<div class="rc" style="margin-bottom:16px"><div class="rl">Template de Título Otimizado <button class="btn-cp" id="bcp_tmpl" onclick="cpText(${JSON.stringify(d.titleTemplate)},'bcp_tmpl')">📋 Copiar</button></div><div style="font-size:15px;font-weight:700;color:var(--or);line-height:1.5">${d.titleTemplate}</div></div>`;
+    html+=`<div class="g2" style="gap:14px">
+      <div class="rc"><div class="rl">Keywords Primárias</div>${(d.primary||[]).map(k=>`<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:13px"><span onclick="cpText('${k.kw.replace(/'/g,"\\'")}',null)" style="cursor:pointer">${k.kw}</span><div style="display:flex;gap:5px"><span style="font-size:10px;background:rgba(0,0,0,.35);padding:2px 7px;border-radius:3px;color:${k.volume==='alto'?'#4CAF50':k.volume==='médio'?'#FF9800':'#555'}">Vol: ${k.volume}</span><span style="font-size:10px;background:rgba(0,0,0,.35);padding:2px 7px;border-radius:3px;color:var(--t2)">Conc: ${k.competition}</span></div></div>`).join('')}</div>
+      <div class="rc"><div class="rl">Long-tail Keywords</div>${(d.longtail||[]).map(k=>`<div onclick="cpText('${k.replace(/'/g,"\\'")}',null)" style="padding:7px 0;border-bottom:1px solid var(--bd);font-size:13px;color:var(--t2);cursor:pointer">${k} <span style="font-size:10px;color:var(--mu)">▸ copiar</span></div>`).join('')}</div>
+    </div>`;
+    if(d.negative?.length)html+=`<div class="rc" style="margin-top:14px;border-color:rgba(244,67,54,.25)"><div class="rl" style="color:#f44336">Termos a Evitar</div><div class="tag-wrap">${d.negative.map(n=>`<span style="background:rgba(244,67,54,.08);color:#f44336;border:1px solid rgba(244,67,54,.25);padding:4px 12px;border-radius:20px;font-size:12px">✕ ${n}</span>`).join('')}</div></div>`;
+    document.getElementById('seoResults').innerHTML=html;
+  }catch(e){document.getElementById('seoResults').innerHTML=`<div style="color:var(--t2);text-align:center;padding:40px">Erro: ${e.message}</div>`;}
+  btn.disabled=false;btn.textContent='🔍 Pesquisar';
+}
+</script>
+</body>
+</html>
